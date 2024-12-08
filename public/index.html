@@ -14,10 +14,43 @@
           <a class="navItem navLink navBarBrand">Task Management</s>
         </div>
         <div class="navGroup">
-          <a class="navItem navLink">DashBoard</a>
+          <a class="navItem navLink">Dashboard</a>
           <a class="navItem navLink">Login</a>
         </div>
       </div>
+    </section>
+    <section id="newTaskArea">
+      <h3 class="sectionHeader"></h3>
+    <form action="" class="newTaskForm">
+       <div class="formGroup"> 
+        <label for="taskName">Task Name</label> 
+        <input type="text" name="taskName" id="taskName">
+      </div>
+      <div class="formGroup"> 
+        <label for="taskDeadline">Task Deadline</label> 
+        <input type="date" name="taskDeadline" id="taskDeadline">
+      </div>
+      <div class="formGroup"> 
+        <fieldset>
+          <legend>Task Status</legend>
+          <div class="fieldsetGroup">
+            <label for="completed">Complete</label>
+            <input type="radio" id="completed" name="taskStatus" value="complete"/> 
+          </div>
+          <div  class="fieldsetGroup"> 
+            <label for="active">Active</label>
+            <input type="radio" id="active" name="taskStatus"  value="active" checked /> 
+          </div> 
+        </fieldset>
+      </div>
+        <button type="submit">Create Task</button>
+      </form>
+
+    </section>
+    <section id="taskManagementArea">
+      <div class="newTasksArea"></div>
+      <div class="currentTasksArea"></div>
+      <div class="completedTasksArea"></div>
     </section>
   </body>
 </html>
