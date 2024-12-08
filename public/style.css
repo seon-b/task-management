@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:root {
+  --navbarColor: #2ec4b6;
+  --navbarTextColor: white;
+}
+
+#navbar {
+  background-color: var(--navbarColor);
+  border: 0.2em solid var(--navbarColor);
+  color: var(--navbarTextColor);
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0.75rem;
+}
+
+#navbar a {
+  padding: 0.22em;
+}
+
+#navbar a:hover {
+  cursor: pointer;
+}
