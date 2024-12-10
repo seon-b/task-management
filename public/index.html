@@ -6,6 +6,7 @@
     <title>Task Management</title>
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="script.js" defer></script>
+    
   </head>
   <body>
     <section id="navigation">
@@ -31,26 +32,31 @@
         <input type="date" name="taskDeadline" id="taskDeadline">
       </div>
       <div class="formGroup"> 
-        <fieldset>
-          <legend>Task Status</legend>
-          <div class="fieldsetGroup">
-            <label for="completed">Complete</label>
-            <input type="radio" id="completed" name="taskStatus" value="complete"/> 
-          </div>
-          <div  class="fieldsetGroup"> 
-            <label for="active">Active</label>
-            <input type="radio" id="active" name="taskStatus"  value="active" checked /> 
-          </div> 
-        </fieldset>
+        <label for="completed">Complete</label>
+        <input type="radio" id="completed" name="taskStatus" value="complete"/> 
+        <label for="active">Active</label>
+        <input type="radio" id="active" name="taskStatus"  value="active" checked /> 
       </div>
         <button type="submit">Create Task</button>
       </form>
-
     </section>
     <section id="taskManagementArea">
-      <div class="newTasksArea"></div>
-      <div class="currentTasksArea"></div>
-      <div class="completedTasksArea"></div>
+      <div class="newTasksArea">
+        <div data-new-task></div>
+
+      </div>
+      <div class="currentTasksArea">
+        <div data-current-task></div>
+      </div>
+      <div class="completedTasksArea">
+        <div data-completed-task></div>
+      </div>
     </section>
+    <template id="taskComponent">
+      <div class="taskHeader"><h4>Task Name</h4></div>
+      <div class="taskContent">
+        <p class="deadline">Deadline Date</p>
+      </div>
+    </template>
   </body>
 </html>
