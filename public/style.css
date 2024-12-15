@@ -25,3 +25,8 @@
 #navbar a:hover {
   cursor: pointer;
 }
+
+#taskManagementArea {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
