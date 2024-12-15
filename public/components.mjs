@@ -65,12 +65,13 @@ let idHashMap = {
   62: 122,
 };
 
-export function addComponent(templateId, element) {
+export function addComponent(templateId, component) {
   let taskTemplate = document.querySelector(templateId);
-  let taskTemplateContent = taskTemplate.content.cloneNode(true);
-  element.appendChild(taskTemplateContent);
+  let newComponent = taskTemplate.content.cloneNode(true);
+  let newComponentId = newComponent.querySelector(".taskContainer");
   let newId = generateRandomId(6);
-  setComponentId(element, newId);
+  setComponentId(newComponentId, newId);
+  component.appendChild(newComponent);
 }
 
 function generateRandomId(idLength) {
@@ -86,13 +87,17 @@ function generateRandomId(idLength) {
 }
 
 function setComponentId(component, value) {
-  component.childNodes[1].dataset.taskId = value;
+  console.log(component.childNodes);
+  component.dataset.taskId = value;
   setAppState("componentIdListAdd", value);
+  console.log(appState);
 }
 
 export function removeComponent(componentId) {
   let componentToRemove = document.querySelector(
-    `[data-current-task = ${componentId}]`
+    `[data-task-id = "${componentId}"]`
   );
+
+  componentToRemove.parentElement.removeChild(componentToRemove);
   setAppState("componentIdListRemove", componentId);
 }
