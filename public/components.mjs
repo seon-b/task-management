@@ -69,6 +69,8 @@ export function addComponent(templateId, element) {
   let taskTemplate = document.querySelector(templateId);
   let taskTemplateContent = taskTemplate.content.cloneNode(true);
   element.appendChild(taskTemplateContent);
+  let newId = generateRandomId(6);
+  setComponentId(element, newId);
 }
 
 function generateRandomId(idLength) {
@@ -85,10 +87,12 @@ function generateRandomId(idLength) {
 
 function setComponentId(component, value) {
   component.childNodes[1].dataset.taskId = value;
+  setAppState("componentIdListAdd", value);
 }
 
 export function removeComponent(componentId) {
   let componentToRemove = document.querySelector(
     `[data-current-task = ${componentId}]`
   );
+  setAppState("componentIdListRemove", componentId);
 }
