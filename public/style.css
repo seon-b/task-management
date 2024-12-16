@@ -6,6 +6,10 @@
 :root {
   --navbarColor: #2ec4b6;
   --navbarTextColor: white;
+  --taskInputBottomBorder: 2px solid black;
+  --taskInputWidth: 8em;
+  --buttonBorderRadius: 0.2em;
+  --buttonPadding: 0.4em;
 }
 
 #navbar {
@@ -24,6 +28,43 @@
 
 #navbar a:hover {
   cursor: pointer;
+}
+
+#newTaskArea {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3em;
+  margin-top: 3em;
+}
+
+#taskName {
+  border: none;
+  border-bottom: var(--taskInputBottomBorder);
+  outline: none;
+  width: var(--taskInputWidth);
+}
+
+#taskDeadline {
+  border: none;
+  border-bottom: var(--taskInputBottomBorder);
+  outline: none;
+  width: var(--taskInputWidth);
+}
+
+.newTaskForm {
+  width: 25%;
+}
+
+.newTaskForm .formGroup {
+  padding: 0.5em;
+}
+
+.submitButton {
+  background-color: var(--navbarColor);
+  border: 2px solid var(--navbarColor);
+  border-radius: var(--buttonBorderRadius);
+  color: var(--navbarTextColor);
+  padding: var(--buttonPadding);
 }
 
 #taskManagementArea {

@@ -24,12 +24,12 @@
       <h3 class="sectionHeader"></h3>
     <form action="" class="newTaskForm">
        <div class="formGroup"> 
-        <label for="taskName">Task Name</label> 
-        <input type="text" name="taskName" id="taskName">
+        <label for="taskName">Task Name: </label> 
+        <input type="text" name="taskName" id="taskName" placeholder="Enter New Task">
       </div>
       <div class="formGroup"> 
-        <label for="taskDeadline">Task Deadline</label> 
-        <input type="date" name="taskDeadline" id="taskDeadline">
+        <label for="taskDeadline">Task Deadline: </label> 
+        <input type="date" name="taskDeadline" id="taskDeadline" >
       </div>
       <div class="formGroup"> 
         <label for="completed">Complete</label>
@@ -37,7 +37,7 @@
         <label for="active">Active</label>
         <input type="radio" id="active" name="taskStatus"  value="active" checked /> 
       </div>
-        <button type="submit">Create Task</button>
+      <div class="formGroup"> <button type="submit" class="submitButton">Create Task</button></div>  
       </form>
     </section>
     <section id="taskManagementArea">
@@ -57,10 +57,11 @@
     </section>
     <template id="taskComponent">
       <div data-task-id class="taskContainer">
-      <div class="taskHeader"><h4>Task Name</h4></div>
+      <div class="taskHeader"><h5>Task Name</h5></div>
       <div class="taskContent">
         <p class="deadline">Deadline Date</p>
       </div>
+      <div><button class="deleteButton">x</button></div>
     </div>
     </template>
   </body>
