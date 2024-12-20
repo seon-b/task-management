@@ -87,10 +87,8 @@ function generateRandomId(idLength) {
 }
 
 function setComponentId(component, value) {
-  console.log(component.childNodes);
   component.dataset.taskId = value;
   setAppState("componentIdListAdd", value);
-  console.log(appState);
 }
 
 export function removeComponent(componentId) {
