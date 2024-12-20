@@ -4,12 +4,12 @@
 }
 
 :root {
+  --buttonBorderRadius: 0.2em;
+  --buttonPadding: 0.4em;
   --navbarColor: #2ec4b6;
   --navbarTextColor: white;
   --taskInputBottomBorder: 2px solid black;
   --taskInputWidth: 8em;
-  --buttonBorderRadius: 0.2em;
-  --buttonPadding: 0.4em;
   --taskColumnBorder: none;
 }
 
@@ -40,6 +40,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+h4 {
+  display: flex;
+  justify-self: center;
 }
 
 #navbar {
