@@ -16,6 +16,10 @@ app.get("/", (req, res, next) => {
   res.render("index");
 });
 
+app.get("/login", (req, res, next) => {
+  res.render("login");
+});
+
 app.listen(PORT, () => {
   console.log(`Task Management App listening on port ${PORT}`);
 });
