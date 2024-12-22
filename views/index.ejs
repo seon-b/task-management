@@ -3,39 +3,47 @@
   <%- include("headerComponent") -%>
 
   <body>
-    <section id="navigationSection">
-      <div id="navbar">
-        <div class="navGroup">
-          <a class="navItem navLink navBarBrand">Task Management</s>
-        </div>
-        <div class="navGroup">
-          <a class="navItem navLink">Dashboard</a>
-          <a class="navItem navLink">Login</a>
-        </div>
-      </div>
-    </section>
+    <%- include("navComponent") -%>
+
     <section id="newTaskSection">
       <h3 class="sectionHeader"></h3>
-    <form action="" class="newTaskForm">
-       <div class="formGroup"> 
-        <label for="taskName">Task Name: </label> 
-        <input type="text" name="taskName" id="taskName" placeholder="Enter New Task">
-      </div>
-      <div class="formGroup"> 
-        <label for="taskDeadline">Task Deadline: </label> 
-        <input type="date" name="taskDeadline" id="taskDeadline" >
-      </div>
-      <div class="formGroup"> 
-        <label for="completed">Complete</label>
-        <input type="radio" id="completed" name="taskStatus" value="complete"/> 
-        <label for="active">Active</label>
-        <input type="radio" id="active" name="taskStatus"  value="active" checked /> 
-      </div>
-      <div class="formGroup"> <button type="submit" class="submitButton">Create Task</button></div>  
+      <form action="" class="newTaskForm">
+        <div class="formGroup">
+          <label for="taskName">Task Name: </label>
+          <input
+            type="text"
+            name="taskName"
+            id="taskName"
+            placeholder="Enter New Task"
+          />
+        </div>
+        <div class="formGroup">
+          <label for="taskDeadline">Task Deadline: </label>
+          <input type="date" name="taskDeadline" id="taskDeadline" />
+        </div>
+        <div class="formGroup">
+          <label for="completed">Complete</label>
+          <input
+            type="radio"
+            id="completed"
+            name="taskStatus"
+            value="complete"
+          />
+          <label for="active">Active</label>
+          <input
+            type="radio"
+            id="active"
+            name="taskStatus"
+            value="active"
+            checked
+          />
+        </div>
+        <div class="formGroup">
+          <button type="submit" class="submitButton">Create Task</button>
+        </div>
       </form>
     </section>
     <section id="taskManagementArea">
-      
       <div class="newTasksArea">
         <h4 class="taskManagementAreaColumn">New Tasks</h4>
         <div data-new-task></div>
@@ -51,13 +59,12 @@
     </section>
     <template id="taskComponent">
       <div data-task-id class="taskContainer">
-      <div class="taskHeader"><h5>Task Name</h5></div>
-      <div class="taskContent">
-        <p class="deadline">Deadline Date</p>
+        <div class="taskHeader"><h5>Task Name</h5></div>
+        <div class="taskContent">
+          <p class="deadline">Deadline Date</p>
+        </div>
+        <div><button class="deleteButton">x</button></div>
       </div>
-      <div><button class="deleteButton">x</button></div>
-    </div>
     </template>
   </body>
 </html>
-
