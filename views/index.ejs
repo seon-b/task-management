@@ -22,10 +22,17 @@
           <input type="date" name="taskDeadline" id="taskDeadline" />
         </div>
         <div class="formGroup">
+          <label for="taskContent"></label>
+          <textarea name="taskContent" id="taskContent">
+Enter task description...</textarea
+          >
+        </div>
+        <div class="formGroup">
           <label for="completed">Complete</label>
           <input
             type="radio"
             id="completed"
+            class="taskStatus"
             name="taskStatus"
             value="complete"
           />
@@ -33,6 +40,7 @@
           <input
             type="radio"
             id="active"
+            class="taskStatus"
             name="taskStatus"
             value="active"
             checked
@@ -66,9 +74,9 @@
             <h5 class="deadline">Deadline Date</h5>
           </div>
         </div>
-        <div class="taskContent">Content</div>
+        <div class="content">Content</div>
         <div>
-          <p class="taskStatus">Active</p>
+          <p class="status">Active</p>
           <button class="deleteButton">x</button>
         </div>
       </div>
