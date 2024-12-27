@@ -65,7 +65,7 @@ let idHashMap = {
   62: 122,
 };
 
-export function addComponent(templateId, component) {
+export function addComponent(templateId, component, contentObject) {
   let taskTemplate = document.querySelector(templateId);
   let newComponent = taskTemplate.content.cloneNode(true);
   let newComponentId = newComponent.querySelector(".taskContainer");
