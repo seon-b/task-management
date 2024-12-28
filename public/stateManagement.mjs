@@ -6,7 +6,7 @@ export let appState = {
   taskStatus: "active",
 };
 
-export function setAppState(state, value) {
+export function setAppState(state, value = "") {
   if (state === "componentIdListAdd") {
     let newArray = appState.componentIdList;
     newArray.push(value);
@@ -28,6 +28,14 @@ export function setAppState(state, value) {
     appState = { ...appState, taskName: value };
   } else if (state === "taskStatus") {
     appState = { ...appState, taskStatus: value };
+  } else if (state === "clearForm") {
+    appState = {
+      ...appState,
+      taskContent: "",
+      taskDeadline: "",
+      taskName: "",
+      taskStatus: "active",
+    };
   } else {
   }
 }
