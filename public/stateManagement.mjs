@@ -1,5 +1,6 @@
 export let appState = {
   componentIdList: [],
+  taskContent: "",
   taskDeadline: "",
   taskName: "",
   taskStatus: "active",
@@ -19,6 +20,8 @@ export function setAppState(state, value) {
         appState.componentIdList.splice(index, 1);
       }
     });
+  } else if (state === "taskContent") {
+    appState = { ...appState, taskContent: value };
   } else if (state === "taskDeadline") {
     appState = { ...appState, taskDeadline: value };
   } else if (state === "taskName") {
