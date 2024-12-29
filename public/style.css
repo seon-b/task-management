@@ -42,6 +42,22 @@
   align-items: center;
 }
 
+.deleteButton {
+  background-color: white;
+  border-color: white;
+  color: var(--navbarColor);
+  cursor: pointer;
+  outline: auto;
+  outline-color: var(--navbarColor);
+  outline-width: thick;
+}
+
+.deleteButton:hover {
+  background-color: var(--navbarColor);
+  border: 2px solid var(--navbarColor);
+  border-radius: var(--buttonBorderRadius);
+  color: var(--navbarTextColor);
+}
 h4 {
   display: flex;
   justify-self: center;
@@ -128,4 +144,11 @@ input {
   border-bottom: var(--taskInputBottomBorder);
   outline: none;
   width: var(--taskInputWidth);
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5em;
 }
