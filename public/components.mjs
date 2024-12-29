@@ -65,13 +65,18 @@ let idHashMap = {
   62: 122,
 };
 
-export function addComponent(templateId, component, contentObject) {
+export function addComponent(templateId, taskColumn, contentObject) {
+  if (isContentObjectValid(contentObject) === false) return;
   let taskTemplate = document.querySelector(templateId);
   let newComponent = taskTemplate.content.cloneNode(true);
   let newComponentId = newComponent.querySelector(".taskContainer");
   let newId = generateRandomId(6);
   setComponentId(newComponentId, newId);
-  component.appendChild(newComponent);
+  newComponent.querySelector(".content").textContent = appState.taskContent;
+  newComponent.querySelector(".deadline").textContent = appState.taskDeadline;
+  newComponent.querySelector(".name").textContent = appState.taskName;
+  newComponent.querySelector(".status").textContent = appState.taskStatus;
+  taskColumn.appendChild(newComponent);
 }
 
 function generateRandomId(idLength) {
@@ -98,4 +103,14 @@ export function removeComponent(componentId) {
 
   componentToRemove.parentElement.removeChild(componentToRemove);
   setAppState("componentIdListRemove", componentId);
+}
+
+export function isContentObjectValid(contentObject) {
+  if (
+    contentObject.taskContent === "" ||
+    contentObject.taskDeadline === "" ||
+    contentObject.taskName === ""
+  ) {
+    return false;
+  }
 }
