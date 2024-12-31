@@ -54,8 +54,15 @@ function getUserSelection(e) {
   }
 }
 
+function initializeTaskList() {
+  appState.componentList.forEach((task) => {
+    console.log(task);
+    addComponent("#taskComponent", newTaskColumn, task);
+  });
+}
+completeRadioButton.addEventListener("change", (e) => getUserSelection(e));
+activeRadioButton.addEventListener("change", (e) => getUserSelection(e));
 taskNameInput.addEventListener("change", (e) => getUserInput(e));
 taskDeadlineInput.addEventListener("change", (e) => getUserInput(e));
 taskContentInput.addEventListener("change", (e) => getUserInput(e));
-completeRadioButton.addEventListener("change", (e) => getUserSelection(e));
-activeRadioButton.addEventListener("change", (e) => getUserSelection(e));
+window.addEventListener("load", initializeTaskList);
