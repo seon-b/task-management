@@ -1,5 +1,27 @@
 export let appState = {
+  errorSucessMessage: "",
   componentIdList: [],
+  componentList: [
+    {
+      taskContent: "Study merge sort and binary search algorithms",
+      taskDeadline: new Date().toLocaleDateString("en-US"),
+      taskName: "Study",
+      taskStatus: "active",
+    },
+    {
+      taskContent: "Study linked list and binary search tree data structures",
+      taskDeadline: new Date().toLocaleDateString("en-US"),
+      taskName: "Study",
+      taskStatus: "active",
+    },
+    {
+      taskContent:
+        "Register for Calculus III, Advanced Computer Architecture, and Digital Signal Processing",
+      taskDeadline: new Date().toLocaleDateString("en-US"),
+      taskName: "Register for classes",
+      taskStatus: "active",
+    },
+  ],
   taskContent: "",
   taskDeadline: "",
   taskName: "",
