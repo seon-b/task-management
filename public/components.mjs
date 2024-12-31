@@ -72,10 +72,12 @@ export function addComponent(templateId, taskColumn, contentObject) {
   let newComponentId = newComponent.querySelector(".taskContainer");
   let newId = generateRandomId(6);
   setComponentId(newComponentId, newId);
-  newComponent.querySelector(".content").textContent = appState.taskContent;
-  newComponent.querySelector(".deadline").textContent = appState.taskDeadline;
-  newComponent.querySelector(".name").textContent = appState.taskName;
-  newComponent.querySelector(".status").textContent = appState.taskStatus;
+  newComponent.querySelector(".content").textContent =
+    contentObject.taskContent;
+  newComponent.querySelector(".deadline").textContent =
+    contentObject.taskDeadline;
+  newComponent.querySelector(".name").textContent = contentObject.taskName;
+  newComponent.querySelector(".status").textContent = contentObject.taskStatus;
   taskColumn.appendChild(newComponent);
 }
 
