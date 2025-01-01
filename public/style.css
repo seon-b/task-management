@@ -12,21 +12,21 @@
   --taskColumnColorLightness: 92%;
   --taskInputBottomBorder: 2px solid black;
   --taskInputWidth: 8em;
-  --taskColumnBorder: 2px solid var(--taskColumnColor);
+  --taskColumnBorder: 2px solid var(--navbarColor);
   --taskColumnBorderRadius: calc(var(--buttonBorderRadius) * 2);
 }
 
 .completedTasksArea {
   background-color: var(--taskColumnColor);
   border: var(--taskColumnBorder);
-  border-top: none;
+  /* border-top: none; */
   border-radius: var(--taskColumnBorderRadius);
 }
 
 .currentTasksArea {
   background-color: var(--taskColumnColor);
   border: var(--taskColumnBorder);
-  border-top: none;
+  /* border-top: none; */
   border-radius: var(--taskColumnBorderRadius);
 }
 
@@ -110,7 +110,7 @@ input {
 .newTasksArea {
   background-color: var(--taskColumnColor);
   border: var(--taskColumnBorder);
-  border-top: none;
+  /* border-top: none; */
   border-radius: var(--taskColumnBorderRadius);
 }
 
@@ -153,6 +153,7 @@ input {
   background-color: white;
   border: 2px solid var(--navbarColor);
   border-radius: calc(var(--buttonBorderRadius) * 2);
+  cursor: move;
   margin-bottom: 0.22em;
   padding: var(--buttonPadding);
   width: calc(var(--taskInputWidth) + 100px);
