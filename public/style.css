@@ -6,19 +6,28 @@
 :root {
   --buttonBorderRadius: 0.2em;
   --buttonPadding: 0.4em;
-  --navbarColor: #2ec4b6;
+  --navbarColor: hsl(174, 62%, 47%);
   --navbarTextColor: white;
+  --taskColumnColor: hsl(174, 62%, var(--taskColumnColorLightness));
+  --taskColumnColorLightness: 92%;
   --taskInputBottomBorder: 2px solid black;
   --taskInputWidth: 8em;
-  --taskColumnBorder: none;
+  --taskColumnBorder: 2px solid var(--taskColumnColor);
+  --taskColumnBorderRadius: calc(var(--buttonBorderRadius) * 2);
 }
 
 .completedTasksArea {
+  background-color: var(--taskColumnColor);
   border: var(--taskColumnBorder);
+  border-top: none;
+  border-radius: var(--taskColumnBorderRadius);
 }
 
 .currentTasksArea {
+  background-color: var(--taskColumnColor);
   border: var(--taskColumnBorder);
+  border-top: none;
+  border-radius: var(--taskColumnBorderRadius);
 }
 
 [data-new-task] {
@@ -99,7 +108,10 @@ input {
 }
 
 .newTasksArea {
+  background-color: var(--taskColumnColor);
   border: var(--taskColumnBorder);
+  border-top: none;
+  border-radius: var(--taskColumnBorderRadius);
 }
 
 .newTaskForm {
@@ -132,11 +144,13 @@ input {
 #taskManagementArea {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 0.2em;
   margin: 0 auto;
   width: 80%;
 }
 
 .taskContainer {
+  background-color: white;
   border: 2px solid var(--navbarColor);
   border-radius: calc(var(--buttonBorderRadius) * 2);
   margin-bottom: 0.22em;
