@@ -6,6 +6,12 @@ const activeRadioButton = document.querySelector("#active");
 const currentTaskColumn = document.querySelector("[data-current-task]");
 const completedTaskColumn = document.querySelector("[data-completed-task]");
 const createTaskButton = document.querySelector(".submitButton");
+let dragAndDropElements;
+
+const dragAndDropElementContainers = document.querySelector(
+  "#taskManagementArea"
+).childNodes;
+
 const newTaskColumn = document.querySelector("[data-new-task]");
 const taskNameInput = document.querySelector("#taskName");
 const taskDeadlineInput = document.querySelector("#taskDeadline");
@@ -16,7 +22,13 @@ createTaskButton.addEventListener("click", (e) => {
   addComponent("#taskComponent", newTaskColumn, appState);
   setAppState("clearForm");
   clearForm();
+  setDragAndDropElements();
+  initializeDragAndDrop();
 });
+
+initializeTaskList();
+setDragAndDropElements();
+initializeDragAndDrop();
 
 function clearForm() {
   taskContentInput.value = appState.taskContent;
@@ -24,6 +36,7 @@ function clearForm() {
   taskNameInput.value = appState.taskContent;
   activeRadioButton.checked = true;
 }
+
 function getUserInput(e) {
   let idName = "#";
   let inputLabel = e.target.name;
@@ -55,14 +68,42 @@ function getUserSelection(e) {
 }
 
 function initializeTaskList() {
+  if (appState.componentList.length === 0) return;
   appState.componentList.forEach((task) => {
-    console.log(task);
     addComponent("#taskComponent", newTaskColumn, task);
   });
 }
-completeRadioButton.addEventListener("change", (e) => getUserSelection(e));
+
+function initializeDragAndDrop() {
+  dragAndDropElements.forEach((element) => {
+    if (!element.classList.contains("dragAndDropEnabled")) {
+      element.addEventListener("dragstart", () => {
+        element.classList.add("draggingComponent");
+      });
+      element.addEventListener("dragend", () => {
+        element.classList.remove("draggingComponent");
+      });
+      element.classList.add("dragAndDropEnabled");
+    } else {
+    }
+  });
+
+  dragAndDropElementContainers.forEach((element) => {
+    element.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      let currentDraggingComponent =
+        document.querySelector(".draggingComponent");
+      element.appendChild(currentDraggingComponent);
+    });
+  });
+}
+
+function setDragAndDropElements() {
+  dragAndDropElements = document.querySelectorAll(".taskContainer");
+}
+
 activeRadioButton.addEventListener("change", (e) => getUserSelection(e));
+completeRadioButton.addEventListener("change", (e) => getUserSelection(e));
 taskNameInput.addEventListener("change", (e) => getUserInput(e));
 taskDeadlineInput.addEventListener("change", (e) => getUserInput(e));
 taskContentInput.addEventListener("change", (e) => getUserInput(e));
-window.addEventListener("load", initializeTaskList);

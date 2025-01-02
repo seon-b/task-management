@@ -73,6 +73,10 @@
   border-radius: var(--buttonBorderRadius);
   color: var(--navbarTextColor);
 }
+
+.draggingComponent {
+}
+
 h4 {
   display: flex;
   justify-self: center;
@@ -146,6 +150,7 @@ input {
   grid-template-columns: repeat(3, 1fr);
   gap: 0.2em;
   margin: 0 auto;
+  min-height: 500px;
   width: 80%;
 }
 
