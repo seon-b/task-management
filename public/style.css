@@ -18,15 +18,15 @@
 
 .completedTasksArea {
   background-color: var(--taskColumnColor);
-  border: var(--taskColumnBorder);
-  /* border-top: none; */
+  /* border: var(--taskColumnBorder); */
+  border: none;
   border-radius: var(--taskColumnBorderRadius);
 }
 
 .currentTasksArea {
   background-color: var(--taskColumnColor);
-  border: var(--taskColumnBorder);
-  /* border-top: none; */
+  /* border: var(--taskColumnBorder); */
+  border: none;
   border-radius: var(--taskColumnBorderRadius);
 }
 
@@ -77,7 +77,7 @@
 .draggingComponent {
 }
 
-h4 {
+#taskManagementArea h4 {
   display: flex;
   justify-self: center;
 }
@@ -113,8 +113,8 @@ input {
 
 .newTasksArea {
   background-color: var(--taskColumnColor);
-  border: var(--taskColumnBorder);
-  /* border-top: none; */
+  /* border: var(--taskColumnBorder); */
+  border: none;
   border-radius: var(--taskColumnBorderRadius);
 }
 
