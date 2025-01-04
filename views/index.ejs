@@ -3,56 +3,8 @@
   <%- include("headerTemplate") -%>
 
   <body>
-    <%- include("navTemplate") -%>
+    <%- include("navTemplate") -%> <%- include("newTaskFormTemplate") -%>
 
-    <section id="newTaskSection">
-      <h3 class="sectionHeader"></h3>
-      <form action="" class="newTaskForm">
-        <div class="formGroup">
-          <label for="taskName">Task Name: </label>
-          <input
-            type="text"
-            name="taskName"
-            id="taskName"
-            placeholder="Enter New Task"
-          />
-        </div>
-        <div class="formGroup">
-          <label for="taskDeadline">Task Deadline: </label>
-          <input type="date" name="taskDeadline" id="taskDeadline" />
-        </div>
-        <div class="formGroup">
-          <label for="taskContent"></label>
-          <textarea
-            name="taskContent"
-            id="taskContent"
-            placeholder="Enter task description..."
-          ></textarea>
-        </div>
-        <div class="formGroup">
-          <label for="complete">Complete</label>
-          <input
-            type="radio"
-            id="complete"
-            class="taskStatus"
-            name="taskStatus"
-            value="complete"
-          />
-          <label for="active">Active</label>
-          <input
-            type="radio"
-            id="active"
-            class="taskStatus"
-            name="taskStatus"
-            value="active"
-            checked
-          />
-        </div>
-        <div class="formGroup">
-          <button type="submit" class="submitButton">Create Task</button>
-        </div>
-      </form>
-    </section>
     <section id="taskManagementArea">
       <div class="newTasksArea">
         <h4 class="taskManagementAreaColumn">New Tasks</h4>
