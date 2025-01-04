@@ -4,21 +4,8 @@
 
   <body>
     <%- include("navTemplate") -%> <%- include("newTaskFormTemplate") -%>
+    <%-include("taskManagementTemplate") -%>
 
-    <section id="taskManagementArea">
-      <div class="newTasksArea">
-        <h4 class="taskManagementAreaColumn">New Tasks</h4>
-        <div data-new-task></div>
-      </div>
-      <div class="currentTasksArea">
-        <h4 class="taskManagementAreaColumn">Current Tasks</h4>
-        <div data-current-task></div>
-      </div>
-      <div class="completedTasksArea">
-        <h4 class="taskManagementAreaColumn">Completed Tasks</h4>
-        <div data-completed-task></div>
-      </div>
-    </section>
     <template id="taskComponent">
       <div data-task-id class="taskContainer" draggable="true">
         <div class="taskHeader">
