@@ -18,14 +18,12 @@
 
 .completedTasksArea {
   background-color: var(--taskColumnColor);
-  /* border: var(--taskColumnBorder); */
   border: none;
   border-radius: var(--taskColumnBorderRadius);
 }
 
 .currentTasksArea {
   background-color: var(--taskColumnColor);
-  /* border: var(--taskColumnBorder); */
   border: none;
   border-radius: var(--taskColumnBorderRadius);
 }
@@ -113,7 +111,6 @@ input {
 
 .newTasksArea {
   background-color: var(--taskColumnColor);
-  /* border: var(--taskColumnBorder); */
   border: none;
   border-radius: var(--taskColumnBorderRadius);
 }
@@ -160,6 +157,7 @@ input {
   border-radius: calc(var(--buttonBorderRadius) * 2);
   cursor: move;
   margin-bottom: 0.22em;
+  overflow-wrap: break-word;
   padding: var(--buttonPadding);
   width: calc(var(--taskInputWidth) + 100px);
 }
