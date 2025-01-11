@@ -6,6 +6,7 @@
 :root {
   --buttonBorderRadius: 0.2em;
   --buttonPadding: 0.4em;
+  --errorColor: rgb(255, 68, 68);
   --navbarColor: hsl(174, 62%, 47%);
   --navbarTextColor: white;
   --taskColumnColor: hsl(174, 62%, var(--taskColumnColorLightness));
@@ -73,6 +74,23 @@
 }
 
 .draggingComponent {
+}
+
+#errorArea {
+  align-items: center;
+  border: none;
+  background-color: var(--errorColor);
+  border-radius: calc(var(--buttonBorderRadius) * 2);
+  color: white;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  margin: 0.3em auto;
+  width: 80%;
+}
+
+.errorAreaHidden {
+  visibility: hidden;
 }
 
 #taskManagementArea h4 {
@@ -182,8 +200,15 @@ input {
     grid-template-columns: 1fr;
   }
 }
+
 @media only screen and (min-width: 768px) and (max-width: 820px) {
   #taskManagementArea {
     width: 95%;
+  }
+}
+
+@media only screen and (min-width: 820px) and (max-width: 853px) {
+  .taskContainer {
+    width: 50%;
   }
 }
