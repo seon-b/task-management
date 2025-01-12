@@ -7,10 +7,13 @@ const prisma = new PrismaClient();
 
 router.get("/user-tasks", async (req, res, next) => {
   const { email } = req.body;
-  const tasks = await prisma.user.findMany({
+
+  const user = await prisma.user.findUnique({
     where: { email: email },
   });
-  res.json(tasks);
+
+  if (user === null) return res.sendStatus(404);
+  res.json(user).statusCode(200);
 });
 
 module.exports = router;
