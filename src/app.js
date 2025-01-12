@@ -1,5 +1,8 @@
+require("dotenv").config();
+
 const express = require("express");
 const morgan = require("morgan");
+const session = require("express-session");
 
 const helmet = require("helmet");
 const path = require("path");
@@ -12,6 +15,16 @@ app.use(morgan("tiny"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "../public")));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      maxAge: 60000 * 120,
+    },
+  })
+);
 app.use("/api", require("./routes"));
 
 app.set("view engine", "ejs");
