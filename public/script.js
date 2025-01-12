@@ -6,6 +6,7 @@ const activeRadioButton = document.querySelector("#active");
 const currentTaskColumn = document.querySelector("[data-current-task]");
 const completedTaskColumn = document.querySelector("[data-completed-task]");
 const createTaskButton = document.querySelector(".submitButton");
+const errorMessage = document.querySelector(".errorMessage");
 let dragAndDropElements;
 
 const dragAndDropElementContainers = document.querySelector(
@@ -35,6 +36,17 @@ function clearForm() {
   taskDeadlineInput.value = appState.taskDeadline;
   taskNameInput.value = appState.taskContent;
   activeRadioButton.checked = true;
+}
+
+function displayErrorMessage(message) {
+  setAppState("errorSucessMessage", message);
+  errorMessage.textContent = appState.errorSucessMessage;
+  errorMessage.parentElement.classList.remove("errorAreaHidden");
+  setTimeout(() => {
+    errorMessage.parentElement.classList.add("errorAreaHidden");
+    setAppState("errorSucessMessage", "");
+    errorMessage.textContent = appState.errorSucessMessage;
+  }, 1000);
 }
 
 function getUserInput(e) {

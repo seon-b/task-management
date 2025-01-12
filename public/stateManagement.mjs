@@ -42,14 +42,6 @@ export function setAppState(state, value = "") {
         appState.componentIdList.splice(index, 1);
       }
     });
-  } else if (state === "taskContent") {
-    appState = { ...appState, taskContent: value };
-  } else if (state === "taskDeadline") {
-    appState = { ...appState, taskDeadline: value };
-  } else if (state === "taskName") {
-    appState = { ...appState, taskName: value };
-  } else if (state === "taskStatus") {
-    appState = { ...appState, taskStatus: value };
   } else if (state === "clearForm") {
     appState = {
       ...appState,
@@ -58,6 +50,16 @@ export function setAppState(state, value = "") {
       taskName: "",
       taskStatus: "active",
     };
+  } else if (state === "errorSucessMessage") {
+    appState = { ...appState, errorSucessMessage: value };
+  } else if (state === "taskContent") {
+    appState = { ...appState, taskContent: value };
+  } else if (state === "taskDeadline") {
+    appState = { ...appState, taskDeadline: value };
+  } else if (state === "taskName") {
+    appState = { ...appState, taskName: value };
+  } else if (state === "taskStatus") {
+    appState = { ...appState, taskStatus: value };
   } else {
   }
 }
