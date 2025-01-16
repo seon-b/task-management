@@ -3,6 +3,8 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const session = require("express-session");
+const passport = require("passport");
+require("../src/auth-strategies/passportLocal");
 
 const helmet = require("helmet");
 const path = require("path");
@@ -25,6 +27,9 @@ app.use(
     },
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/api", require("./routes"));
 
 app.set("view engine", "ejs");
