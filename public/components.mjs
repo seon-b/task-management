@@ -77,7 +77,6 @@ export function addComponent(templateId, taskColumn, contentObject) {
   newComponent.querySelector(".deadline").textContent =
     contentObject.taskDeadline;
   newComponent.querySelector(".name").textContent = contentObject.taskName;
-  newComponent.querySelector(".status").textContent = contentObject.taskStatus;
   taskColumn.appendChild(newComponent);
 }
 

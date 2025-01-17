@@ -5,27 +5,27 @@ export let appState = {
     {
       taskContent: "Study merge sort and binary search algorithms",
       taskDeadline: new Date().toLocaleDateString("en-US"),
+      taskLocationColumn: "newTaskColumn",
       taskName: "Study",
-      taskStatus: "active",
     },
     {
       taskContent: "Study linked list and binary search tree data structures",
       taskDeadline: new Date().toLocaleDateString("en-US"),
+      taskLocationColumn: "newTaskColumn",
       taskName: "Study",
-      taskStatus: "active",
     },
     {
       taskContent:
         "Register for Calculus III, Advanced Computer Architecture, and Digital Signal Processing",
       taskDeadline: new Date().toLocaleDateString("en-US"),
+      taskLocationColumn: "newTaskColumn",
       taskName: "Register for classes",
-      taskStatus: "active",
     },
   ],
   taskContent: "",
   taskDeadline: "",
+  taskLocationColumn: "newTaskColumn",
   taskName: "",
-  taskStatus: "active",
 };
 
 export function setAppState(state, value = "") {
@@ -47,8 +47,8 @@ export function setAppState(state, value = "") {
       ...appState,
       taskContent: "",
       taskDeadline: "",
+      taskLocationColumn: "newTaskColumn",
       taskName: "",
-      taskStatus: "active",
     };
   } else if (state === "errorSucessMessage") {
     appState = { ...appState, errorSucessMessage: value };
@@ -58,8 +58,8 @@ export function setAppState(state, value = "") {
     appState = { ...appState, taskDeadline: value };
   } else if (state === "taskName") {
     appState = { ...appState, taskName: value };
-  } else if (state === "taskStatus") {
-    appState = { ...appState, taskStatus: value };
+  } else if (state === "taskLocationColumn") {
+    appState = { ...appState, taskLocationColumn: value };
   } else {
   }
 }

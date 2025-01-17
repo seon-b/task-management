@@ -114,8 +114,6 @@ function setDragAndDropElements() {
   dragAndDropElements = document.querySelectorAll(".taskContainer");
 }
 
-activeRadioButton.addEventListener("change", (e) => getUserSelection(e));
-completeRadioButton.addEventListener("change", (e) => getUserSelection(e));
 taskNameInput.addEventListener("change", (e) => getUserInput(e));
 taskDeadlineInput.addEventListener("change", (e) => getUserInput(e));
 taskContentInput.addEventListener("change", (e) => getUserInput(e));
