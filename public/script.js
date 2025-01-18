@@ -1,18 +1,13 @@
 import { appState, setAppState } from "./stateManagement.mjs";
 import { addComponent, removeComponent } from "./components.mjs";
 
-const completeRadioButton = document.querySelector("#complete");
-const activeRadioButton = document.querySelector("#active");
 const currentTaskColumn = document.querySelector("[data-current-task]");
 const completedTaskColumn = document.querySelector("[data-completed-task]");
 const createTaskButton = document.querySelector(".submitButton");
 const errorMessage = document.querySelector(".errorMessage");
 let dragAndDropElements;
 
-const dragAndDropElementContainers = document.querySelector(
-  "#taskManagementArea"
-).childNodes;
-
+const dragAndDropElementContainers = document.querySelectorAll(".dropzone");
 const newTaskColumn = document.querySelector("[data-new-task]");
 const taskNameInput = document.querySelector("#taskName");
 const taskDeadlineInput = document.querySelector("#taskDeadline");
@@ -35,7 +30,6 @@ function clearForm() {
   taskContentInput.value = appState.taskContent;
   taskDeadlineInput.value = appState.taskDeadline;
   taskNameInput.value = appState.taskContent;
-  activeRadioButton.checked = true;
 }
 
 function displayErrorMessage(message) {
