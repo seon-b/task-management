@@ -1,5 +1,5 @@
 export let appState = {
-  errorSucessMessage: "",
+  errorSuccessMessage: "",
   componentIdList: [],
   componentList: [
     {
@@ -50,8 +50,8 @@ export function setAppState(state, value = "") {
       taskLocationColumn: "newTaskColumn",
       taskName: "",
     };
-  } else if (state === "errorSucessMessage") {
-    appState = { ...appState, errorSucessMessage: value };
+  } else if (state === "errorSuccessMessage") {
+    appState = { ...appState, errorSuccessMessage: value };
   } else if (state === "taskContent") {
     appState = { ...appState, taskContent: value };
   } else if (state === "taskDeadline") {

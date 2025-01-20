@@ -36,11 +36,15 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 
 app.get("/", (req, res, next) => {
-  res.render("index");
+  res.render("index", { message: null });
 });
 
 app.get("/login", (req, res, next) => {
-  res.render("login");
+  res.render("login", { message: null });
+});
+
+app.get("/login-failed", (req, res, next) => {
+  res.render("login", { message: "Login Unsuccessful" });
 });
 
 app.listen(PORT, () => {
