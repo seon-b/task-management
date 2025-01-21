@@ -1,4 +1,4 @@
-<section id="errorArea" class="errorAreaHidden">
+<section id="errorArea" class="<%= message? '' : 'errorAreaHidden' %>">
   <% if (message) { %>
   <div><h4 class="errorMessage"><%= message %></h4></div>
   <% } %>
