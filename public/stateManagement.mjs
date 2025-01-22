@@ -26,6 +26,9 @@ export let appState = {
   taskDeadline: "",
   taskLocationColumn: "newTaskColumn",
   taskName: "",
+  userSettings: {
+    theme: "default",
+  },
 };
 
 export function setAppState(state, value = "") {
@@ -36,10 +39,23 @@ export function setAppState(state, value = "") {
       ...appState,
       componentIdList: newArray,
     };
+  } else if (state === "componentListAdd") {
+    let newArray = appState.componentList;
+    newArray.push(value);
+    appState = {
+      ...appState,
+      componentList: newArray,
+    };
   } else if (state === "componentIdListRemove") {
     appState.componentIdList.find((id, index) => {
       if (id === value) {
         appState.componentIdList.splice(index, 1);
+      }
+    });
+  } else if (state === "componentListRemove") {
+    appState.componentList.find((id, index) => {
+      if (id === value) {
+        appState.componentList.splice(index, 1);
       }
     });
   } else if (state === "clearForm") {
@@ -60,6 +76,9 @@ export function setAppState(state, value = "") {
     appState = { ...appState, taskName: value };
   } else if (state === "taskLocationColumn") {
     appState = { ...appState, taskLocationColumn: value };
+  } else if (state === "userSettings") {
+    let userSettingsObject = appState.userSettings;
+    appState = { ...appState, taskLocationColumn: userSettingsObject };
   } else {
   }
 }
