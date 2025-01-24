@@ -76,7 +76,7 @@ function getUserSelection(e) {
 function initializeTaskList() {
   if (appState.componentList.length === 0) return;
   appState.componentList.forEach((task) => {
-    addComponent("#taskComponent", newTaskColumn, task);
+    addComponent("#taskComponent", newTaskColumn, task, "initialize");
   });
 }
 

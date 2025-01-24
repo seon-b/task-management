@@ -1,20 +1,23 @@
 export let appState = {
   errorSuccessMessage: "",
-  componentIdList: [],
+  componentIdList: ["gYxBiz", "8nhpUE", "Z8WKIn"],
   componentList: [
     {
+      taskId: "gYxBiz",
       taskContent: "Study merge sort and binary search algorithms",
       taskDeadline: new Date().toLocaleDateString("en-US"),
       taskLocationColumn: "newTaskColumn",
       taskName: "Study",
     },
     {
+      taskId: "8nhpUE",
       taskContent: "Study linked list and binary search tree data structures",
       taskDeadline: new Date().toLocaleDateString("en-US"),
       taskLocationColumn: "newTaskColumn",
       taskName: "Study",
     },
     {
+      taskId: "Z8WKIn",
       taskContent:
         "Register for Calculus III, Advanced Computer Architecture, and Digital Signal Processing",
       taskDeadline: new Date().toLocaleDateString("en-US"),
@@ -42,10 +45,6 @@ export function setAppState(state, value = "") {
   } else if (state === "componentListAdd") {
     let newArray = appState.componentList;
     newArray.push(value);
-    appState = {
-      ...appState,
-      componentList: newArray,
-    };
   } else if (state === "componentIdListRemove") {
     appState.componentIdList.find((id, index) => {
       if (id === value) {
