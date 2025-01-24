@@ -65,19 +65,56 @@ let idHashMap = {
   62: 122,
 };
 
-export function addComponent(templateId, taskColumn, contentObject) {
+export function addComponent(
+  templateId,
+  taskColumn,
+  contentObject,
+  addComponentMode = ""
+) {
   if (isContentObjectValid(contentObject) === false) return;
-  let taskTemplate = document.querySelector(templateId);
-  let newComponent = taskTemplate.content.cloneNode(true);
-  let newComponentId = newComponent.querySelector(".taskContainer");
-  let newId = generateRandomId(6);
-  setComponentId(newComponentId, newId);
-  newComponent.querySelector(".content").textContent =
-    contentObject.taskContent;
-  newComponent.querySelector(".deadline").textContent =
-    contentObject.taskDeadline;
-  newComponent.querySelector(".name").textContent = contentObject.taskName;
-  taskColumn.appendChild(newComponent);
+  if (addComponentMode === "initialize") {
+    let taskTemplate = document.querySelector(templateId);
+    let newComponent = taskTemplate.content.cloneNode(true);
+    let newComponentId = newComponent.querySelector(".taskContainer");
+    setComponentId(newComponentId, contentObject.taskId);
+    newComponent.querySelector(".content").textContent =
+      contentObject.taskContent;
+    newComponent.querySelector(".deadline").textContent =
+      contentObject.taskDeadline;
+    newComponent.querySelector(".name").textContent = contentObject.taskName;
+    taskColumn.appendChild(newComponent);
+  } else {
+    let taskTemplate = document.querySelector(templateId);
+    let newComponent = taskTemplate.content.cloneNode(true);
+    let newComponentId = newComponent.querySelector(".taskContainer");
+    let newId = generateRandomId(6);
+    setComponentId(newComponentId, newId);
+    newComponent.querySelector(".content").textContent =
+      contentObject.taskContent;
+    newComponent.querySelector(".deadline").textContent =
+      contentObject.taskDeadline;
+    newComponent.querySelector(".name").textContent = contentObject.taskName;
+    taskColumn.appendChild(newComponent);
+    let newComponentObject = {
+      taskId: "",
+      taskContent: "",
+      taskDeadline: "",
+      taskLocationColumn: "",
+      taskName: "",
+    };
+    const { taskContent, taskDeadline, taskLocationColumn, taskName } =
+      contentObject;
+
+    newComponentObject = {
+      taskId: newId,
+      taskContent,
+      taskDeadline,
+      taskLocationColumn,
+      taskName,
+    };
+
+    setAppState("componentListAdd", newComponentObject);
+  }
 }
 
 function generateRandomId(idLength) {
