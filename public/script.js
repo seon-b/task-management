@@ -4,8 +4,12 @@ import { addComponent, removeComponent } from "./components.mjs";
 const currentTaskColumn = document.querySelector("[data-current-task]");
 const completedTaskColumn = document.querySelector("[data-completed-task]");
 const createTaskButton = document.querySelector(".submitButton");
+const dashboardLink = document.querySelector("#navDashboardLink");
 const errorMessage = document.querySelector(".errorMessage");
 let dragAndDropElements;
+
+const loginLink = document.querySelector("#navLoginLink");
+const navBrandLink = document.querySelector("#navBrandLink");
 
 const dragAndDropElementContainers = document.querySelectorAll(".dropzone");
 const newTaskColumn = document.querySelector("[data-new-task]");
@@ -108,6 +112,15 @@ function setDragAndDropElements() {
   dragAndDropElements = document.querySelectorAll(".taskContainer");
 }
 
+dashboardLink.addEventListener("click", () => {
+  window.location.assign("/dashboard");
+});
+loginLink.addEventListener("click", () => {
+  window.location.assign("/login");
+});
+navBrandLink.addEventListener("click", () => {
+  window.location.assign("/");
+});
 taskNameInput.addEventListener("change", (e) => getUserInput(e));
 taskDeadlineInput.addEventListener("change", (e) => getUserInput(e));
 taskContentInput.addEventListener("change", (e) => getUserInput(e));
