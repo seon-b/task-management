@@ -1,0 +1,30 @@
+<section id="newTaskSection">
+  <h3 class="sectionHeader"></h3>
+  <form action="" class="newTaskForm">
+    <div class="formGroup">
+      <label for="taskName">Task Name: </label>
+      <input
+        type="text"
+        name="taskName"
+        id="taskName"
+        placeholder="Enter New Task"
+      />
+    </div>
+    <div class="formGroup">
+      <label for="taskDeadline">Task Deadline: </label>
+      <input type="date" name="taskDeadline" id="taskDeadline" />
+    </div>
+    <div class="formGroup">
+      <label for="taskContent"></label>
+      <textarea
+        name="taskContent"
+        id="taskContent"
+        placeholder="Enter task description..."
+      ></textarea>
+    </div>
+    <div class="formGroup">
+      <button type="submit" class="submitButton">Create Task</button>
+    </div>
+  </form>
+  <%- include("userSettings") -%>
+</section>
