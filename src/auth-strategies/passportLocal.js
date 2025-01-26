@@ -47,4 +47,13 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
+function validateUser(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    res.sendStatus(401);
+  }
+}
+passport.isAuthenticated = () => validateUser;
+
 module.exports = passport;
