@@ -2,19 +2,6 @@
 <html lang="en">
   <%- include("loginHeaderTemplate") %> <%- include("errorTemplate") -%>
   <body>
-    <form method="POST" action="/api/auth/login" class="loginForm">
-      <div class="formGroup">
-        <label for="email">Email: </label>
-        <input type="text" name="email" id="email" placeholder="email" />
-      </div>
-      <div class="formGroup">
-        <label for="password">password: </label>
-        <input type="password" name="password" id="password" />
-      </div>
-
-      <div class="formGroup">
-        <button type="submit" class="loginSubmitButton">Log In</button>
-      </div>
-    </form>
+    <%- include("loginFormTemplate") -%>
   </body>
 </html>
