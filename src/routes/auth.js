@@ -5,7 +5,7 @@ const router = express.Router();
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/dashboard",
     failureRedirect: "/login-failed",
     failureMessage: true,
   })
