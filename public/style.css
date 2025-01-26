@@ -145,7 +145,8 @@ input {
   padding: 0.5em;
 }
 
-.submitButton {
+.submitButton,
+.loginSubmitButton {
   background-color: var(--navbarColor);
   border: 2px solid var(--navbarColor);
   border-radius: var(--buttonBorderRadius);
@@ -153,7 +154,8 @@ input {
   padding: var(--buttonPadding);
 }
 
-.submitButton:hover {
+.submitButton:hover,
+.loginSubmitButton:hover {
   background-color: white;
   border-color: white;
   color: var(--navbarColor);
