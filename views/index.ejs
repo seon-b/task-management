@@ -3,21 +3,8 @@
   <%- include("headerTemplate") -%>
 
   <body>
-    <%-include("dashboard") -%>
-
-    <template id="taskComponent">
-      <div data-task-id class="taskContainer" draggable="true">
-        <div class="taskHeader">
-          <h5 class="name">Task Name</h5>
-          <div class="taskHeaderDate">
-            <h5 class="deadline">Deadline Date</h5>
-          </div>
-        </div>
-        <div class="content">Content</div>
-        <div>
-          <button class="deleteButton">x</button>
-        </div>
-      </div>
-    </template>
+    <%- include("navTemplate") -%> <%- include("errorTemplate") -%>
+    <%-include("newTaskFormTemplate") -%> <%-include("taskManagementTemplate")
+    -%> <%-include("taskComponentTemplate") -%>
   </body>
 </html>
