@@ -16,4 +16,22 @@ router.get("/user-tasks", async (req, res, next) => {
   res.json(user).statusCode(200);
 });
 
+router.put("/save-tasks", async (req, res) => {
+  const { email, tasks } = req.body;
+
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (existingUser === null)
+    return res.json({ error: "User does not exist" }).status(404);
+
+  const updatedTasks = await prisma.user.update({
+    where: { email: email },
+    data: { tasks: tasks },
+  });
+  res.json(updatedTasks);
+});
 module.exports = router;
