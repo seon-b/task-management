@@ -39,7 +39,7 @@ app.get("/", (req, res, next) => {
   res.render("index", { message: null });
 });
 
-app.get("/dashboard", passport.isAuthenticated(), (req, res, next) => {
+app.get("/dashboard", (req, res, next) => {
   res.render("dashboard", { message: null });
 });
 

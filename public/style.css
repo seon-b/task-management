@@ -7,9 +7,16 @@
   --buttonBorderRadius: 0.2em;
   --buttonPadding: 0.4em;
   --errorColor: rgb(255, 68, 68);
-  --navbarColor: hsl(174, 62%, 47%);
+  --hValue: 276;
+  --sValue: 66%;
+  --lValue: 40%;
+  --navbarColor: hsl(var(--hValue), var(--sValue), var(--lValue));
   --navbarTextColor: white;
-  --taskColumnColor: hsl(174, 62%, var(--taskColumnColorLightness));
+  --taskColumnColor: hsl(
+    var(--hValue),
+    var(--sValue),
+    var(--taskColumnColorLightness)
+  );
   --taskColumnColorLightness: 92%;
   --taskInputBottomBorder: 2px solid black;
   --taskInputWidth: 8em;
@@ -137,9 +144,9 @@ input {
   border-radius: var(--taskColumnBorderRadius);
 }
 
-.newTaskForm {
-  width: 25%;
-}
+/* .newTaskForm {
+
+} */
 
 .newTaskForm .formGroup {
   padding: 0.5em;
@@ -204,6 +211,12 @@ input {
 @media screen and (max-width: 600px) {
   #taskManagementArea {
     grid-template-columns: 1fr;
+  }
+
+  #newTaskSection {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-self: center;
   }
 
   .dropzone {
