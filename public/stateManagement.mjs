@@ -30,6 +30,7 @@ export let appState = {
   taskLocationColumn: "newTaskColumn",
   taskName: "",
   userSettings: {
+    profileName: "",
     theme: "default",
   },
 };
@@ -67,6 +68,11 @@ export function setAppState(state, value = "") {
     };
   } else if (state === "errorSuccessMessage") {
     appState = { ...appState, errorSuccessMessage: value };
+  } else if (state === "profileName") {
+    appState = {
+      ...appState,
+      userSettings: { ...userSettings, profileName: value },
+    };
   } else if (state === "taskContent") {
     appState = { ...appState, taskContent: value };
   } else if (state === "taskDeadline") {
