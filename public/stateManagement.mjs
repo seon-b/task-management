@@ -71,7 +71,7 @@ export function setAppState(state, value = "") {
   } else if (state === "profileName") {
     appState = {
       ...appState,
-      userSettings: { ...userSettings, profileName: value },
+      userSettings: { ...appState.userSettings, profileName: value },
     };
   } else if (state === "taskContent") {
     appState = { ...appState, taskContent: value };
