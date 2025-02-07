@@ -8,6 +8,7 @@ require("../src/auth-strategies/passportLocal");
 
 const helmet = require("helmet");
 const path = require("path");
+const { validateUser } = require("../src/auth-strategies/passportLocal");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -39,8 +40,8 @@ app.get("/", (req, res, next) => {
   res.render("index", { message: null });
 });
 
-app.get("/dashboard", (req, res, next) => {
-  res.render("dashboard", { message: null });
+app.get("/dashboard", validateUser, (req, res, next) => {
+  res.render("dashboard", { profileName: req.user.email, message: null });
 });
 
 app.get("/login", (req, res, next) => {

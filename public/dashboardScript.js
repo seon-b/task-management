@@ -2,9 +2,13 @@ import { appState, setAppState } from "./stateManagement.mjs";
 
 const saveTasksButton = document.querySelector(".saveTasksButton");
 const componentArray = appState.componentList;
-const userEmail = appState.userSettings.profileName;
+const profileName = document.querySelector(".profileNameArea");
+let userEmail = "";
 
 async function saveCurrentTasks() {
+  setAppState("profileName", profileName.innerHTML);
+  userEmail = appState.userSettings.profileName;
+
   try {
     const res = await fetch("/api/tasks/save-tasks", {
       method: "PUT",
