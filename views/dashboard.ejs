@@ -3,7 +3,11 @@
   <%- include("dashboardHeaderTemplate") -%>
 
   <body>
-    <%- include("navTemplate") -%> <%- include("errorTemplate") -%> <%-
+    <% if (profileName) { %>
+    <div class="profileNameArea"><%= profileName %></div>
+    <% } else { %>
+    <div class="profileNameArea">""</div>
+    <% } %> <%- include("navTemplate") -%> <%- include("errorTemplate") -%> <%-
     include("dashboardCenterTemplate") -%> <%-include("taskManagementTemplate")
     -%> <%-include("taskComponentTemplate") -%>
   </body>

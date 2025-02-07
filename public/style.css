@@ -151,7 +151,9 @@ input {
 .newTaskForm .formGroup {
   padding: 0.5em;
 }
-
+.profileNameArea {
+  display: none;
+}
 .submitButton,
 .loginSubmitButton {
   background-color: var(--navbarColor);
