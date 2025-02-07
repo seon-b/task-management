@@ -41,19 +41,18 @@ passport.deserializeUser(async (id, done) => {
     const user = await prisma.user.findUnique({ where: { id } });
     if (user === null) return done(new Error("User does not exist"));
 
-    return done(null, user);
+    done(null, user);
   } catch (error) {
-    return done(error);
+    done(error);
   }
 });
 
 function validateUser(req, res, next) {
-  if (req.user) {
+  if (req.isAuthenticated()) {
     next();
   } else {
     res.sendStatus(401);
   }
 }
-passport.isAuthenticated = () => validateUser;
 
-module.exports = passport;
+module.exports = { passport, validateUser };
