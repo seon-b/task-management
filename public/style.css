@@ -131,6 +131,11 @@ input {
   cursor: pointer;
 }
 
+#navigationSection {
+  position: sticky;
+  top: 0;
+}
+
 #newTaskSection {
   display: flex;
   justify-content: center;
