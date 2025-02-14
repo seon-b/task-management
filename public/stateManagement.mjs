@@ -31,9 +31,40 @@ export let appState = {
   taskName: "",
   userSettings: {
     profileName: "",
-    theme: "default",
+    theme: {},
   },
 };
+
+export function getAppTheme() {
+  let themeArray = [
+    {
+      colorName: "mint green",
+      hValue: "174",
+      sValue: "62%",
+      lValue: "47%",
+    },
+    {
+      colorName: "red",
+      hValue: "347",
+      sValue: "83%",
+      lValue: "60%",
+    },
+    {
+      colorName: "blue",
+      hValue: "220",
+      sValue: "76%",
+      lValue: "33%",
+    },
+    {
+      colorName: "purple",
+      hValue: "276",
+      sValue: "66%",
+      lValue: "40%",
+    },
+  ];
+
+  return themeArray;
+}
 
 export function setAppState(state, value = "") {
   if (state === "componentIdListAdd") {
@@ -81,6 +112,11 @@ export function setAppState(state, value = "") {
     appState = { ...appState, taskName: value };
   } else if (state === "taskLocationColumn") {
     appState = { ...appState, taskLocationColumn: value };
+  } else if (state === "theme") {
+    appState = {
+      ...appState,
+      userSettings: { ...appState.userSettings, theme: value },
+    };
   } else if (state === "userSettings") {
     let userSettingsObject = appState.userSettings;
     appState = { ...appState, taskLocationColumn: userSettingsObject };
