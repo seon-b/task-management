@@ -40,7 +40,7 @@ export let appState = {
   },
 };
 
-export function getAppTheme() {
+export function getAppThemes() {
   let themeArray = [
     {
       colorName: "mint green",
@@ -71,8 +71,8 @@ export function getAppTheme() {
   return themeArray;
 }
 
-export function changeTheme(e) {
-  let themeArray = getAppTheme();
+export function selectTheme(e) {
+  let themeArray = getAppThemes();
   let selectedThemeIndex = themeArray.findIndex(
     (theme) => theme.colorName === e.target.value
   );
