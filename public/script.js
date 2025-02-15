@@ -1,4 +1,4 @@
-import { appState, setAppState } from "./stateManagement.mjs";
+import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
 import { addComponent, removeComponent } from "./components.mjs";
 
 const currentTaskColumn = document.querySelector("[data-current-task]");
@@ -16,6 +16,7 @@ const newTaskColumn = document.querySelector("[data-new-task]");
 const taskNameInput = document.querySelector("#taskName");
 const taskDeadlineInput = document.querySelector("#taskDeadline");
 const taskContentInput = document.querySelector("#taskContent");
+const root = document.documentElement;
 
 createTaskButton.addEventListener("click", (e) => {
   e.preventDefault();

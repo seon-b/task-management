@@ -32,10 +32,10 @@ export let appState = {
   userSettings: {
     profileName: "",
     theme: {
-      colorName: "purple",
-      hValue: "276",
-      sValue: "66%",
-      lValue: "40%",
+      colorName: "mint green",
+      hValue: "174",
+      sValue: "62%",
+      lValue: "47%",
     },
   },
 };
@@ -69,16 +69,6 @@ export function getAppThemes() {
   ];
 
   return themeArray;
-}
-
-export function selectTheme(e) {
-  let themeArray = getAppThemes();
-  let selectedThemeIndex = themeArray.findIndex(
-    (theme) => theme.colorName === e.target.value
-  );
-
-  let selectedTheme = themeArray[selectedThemeIndex];
-  setAppState("theme", selectedTheme);
 }
 
 export function setAppState(state, value = "") {
@@ -138,4 +128,21 @@ export function setAppState(state, value = "") {
     appState = { ...appState, taskLocationColumn: userSettingsObject };
   } else {
   }
+}
+
+export function selectTheme(e, root) {
+  let themeArray = getAppThemes();
+  let selectedThemeIndex = themeArray.findIndex(
+    (theme) => theme.colorName === e.target.value
+  );
+
+  let selectedTheme = themeArray[selectedThemeIndex];
+  setAppState("theme", selectedTheme);
+  updateTheme(root);
+}
+
+export function updateTheme(root) {
+  root.style.setProperty("--hValue", appState.userSettings.theme.hValue);
+  root.style.setProperty("--sValue", appState.userSettings.theme.sValue);
+  root.style.setProperty("--lValue", appState.userSettings.theme.lValue);
 }
