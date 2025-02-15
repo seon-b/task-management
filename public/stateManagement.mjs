@@ -31,7 +31,12 @@ export let appState = {
   taskName: "",
   userSettings: {
     profileName: "",
-    theme: {},
+    theme: {
+      colorName: "purple",
+      hValue: "276",
+      sValue: "66%",
+      lValue: "40%",
+    },
   },
 };
 
@@ -64,6 +69,16 @@ export function getAppTheme() {
   ];
 
   return themeArray;
+}
+
+export function changeTheme(e) {
+  let themeArray = getAppTheme();
+  let selectedThemeIndex = themeArray.findIndex(
+    (theme) => theme.colorName === e.target.value
+  );
+
+  let selectedTheme = themeArray[selectedThemeIndex];
+  setAppState("theme", selectedTheme);
 }
 
 export function setAppState(state, value = "") {
@@ -113,6 +128,7 @@ export function setAppState(state, value = "") {
   } else if (state === "taskLocationColumn") {
     appState = { ...appState, taskLocationColumn: value };
   } else if (state === "theme") {
+    if (value === "") return;
     appState = {
       ...appState,
       userSettings: { ...appState.userSettings, theme: value },
