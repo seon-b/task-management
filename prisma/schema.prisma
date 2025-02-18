@@ -18,6 +18,7 @@ model User {
   email        String   @unique
   passwordHash String
   tasks        Json?
+  settings     Json?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
