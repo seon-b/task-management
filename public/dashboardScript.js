@@ -97,6 +97,7 @@ async function saveUserSettings() {
   }
 }
 
+profileName.addEventListener("load", getCurrentUserData);
 saveSettingsButton.addEventListener("click", saveUserSettings);
 saveTasksButton.addEventListener("click", saveCurrentTasks);
 themeSelect.addEventListener("change", (e) => selectTheme(e, root));

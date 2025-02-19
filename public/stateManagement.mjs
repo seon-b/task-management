@@ -95,11 +95,7 @@ export function setAppState(state, value = "") {
       }
     });
   } else if (state === "componentListInitialize") {
-    appState.componentList.find((id, index) => {
-      if (id === value) {
-        appState.componentList.splice(index, 1);
-      }
-    });
+    appState = { ...appState, componentList: value };
   } else if (state === "clearForm") {
     appState = {
       ...appState,
