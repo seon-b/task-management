@@ -6,6 +6,24 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
+router.get("/get-user-data", async (req, res) => {
+  const { email } = req.body;
+
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (existingUser === null) {
+    return res.json({ error: "User does not exist" }).status(404);
+  } else {
+    const { tasks, settings } = existingUser;
+    let userSettingsObject = { tasks, settings };
+    return res.json(userSettingsObject);
+  }
+});
+
 router.post("/new-user", async (req, res) => {
   const { email, password } = req.body;
 
