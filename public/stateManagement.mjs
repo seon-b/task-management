@@ -94,6 +94,12 @@ export function setAppState(state, value = "") {
         appState.componentList.splice(index, 1);
       }
     });
+  } else if (state === "componentListInitialize") {
+    appState.componentList.find((id, index) => {
+      if (id === value) {
+        appState.componentList.splice(index, 1);
+      }
+    });
   } else if (state === "clearForm") {
     appState = {
       ...appState,
@@ -118,14 +124,14 @@ export function setAppState(state, value = "") {
   } else if (state === "taskLocationColumn") {
     appState = { ...appState, taskLocationColumn: value };
   } else if (state === "theme") {
-    if (value === "") return;
+    if (value === "" || value === undefined || value === null) return;
     appState = {
       ...appState,
       userSettings: { ...appState.userSettings, theme: value },
     };
   } else if (state === "userSettings") {
-    let userSettingsObject = appState.userSettings;
-    appState = { ...appState, taskLocationColumn: userSettingsObject };
+    if (value === "" || value === undefined || value === null) return;
+    appState = { ...appState, userSettings: value };
   } else {
   }
 }
