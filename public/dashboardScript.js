@@ -17,7 +17,7 @@ async function getCurrentUserData() {
   userEmail = appState.userSettings.profileName;
 
   try {
-    fetch("/api/users/get-user-data", {
+    const res = fetch("/api/users/get-user-data", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +97,7 @@ async function saveUserSettings() {
   }
 }
 
-profileName.addEventListener("load", getCurrentUserData);
+document.addEventListener("DOMContentLoaded", getCurrentUserData);
 saveSettingsButton.addEventListener("click", saveUserSettings);
 saveTasksButton.addEventListener("click", saveCurrentTasks);
 themeSelect.addEventListener("change", (e) => selectTheme(e, root));
