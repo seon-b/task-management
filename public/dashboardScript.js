@@ -2,12 +2,12 @@ import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
 
 const saveSettingsButton = document.querySelector(".saveSettingsButton");
 const saveTasksButton = document.querySelector(".saveTasksButton");
-const componentArray = appState.componentList;
 const profileName = document.querySelector(".profileNameArea");
 const themeSelect = document.querySelector("#themeSelect");
 const root = document.documentElement;
-const initialUserSettings = null;
-const initialUserTasks = null;
+
+let initialUserSettings = null;
+let initialUserTasks = null;
 let userEmail = "";
 
 function deleteTask() {}
@@ -17,8 +17,8 @@ async function getCurrentUserData() {
   userEmail = appState.userSettings.profileName;
 
   try {
-    const res = fetch("/api/users/get-user-data", {
-      method: "GET",
+    const res = await fetch("/api/users/get-user-data", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -31,10 +31,13 @@ async function getCurrentUserData() {
     }
 
     const data = await res.json();
+
     initialUserTasks = data.tasks;
     initialUserSettings = data.settings;
+
     setAppState("componentListInitialize", initialUserTasks);
     setAppState("userSettings", initialUserSettings);
+
     return data;
   } catch (error) {
     console.error("Could not get user data", error);
@@ -44,6 +47,7 @@ async function getCurrentUserData() {
 async function saveCurrentTasks() {
   setAppState("profileName", profileName.innerHTML);
   userEmail = appState.userSettings.profileName;
+  let componentArray = appState.componentList;
 
   try {
     const res = await fetch("/api/tasks/save-tasks", {
