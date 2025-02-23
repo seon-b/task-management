@@ -6,7 +6,7 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-router.get("/get-user-data", async (req, res) => {
+router.post("/get-user-data", async (req, res) => {
   const { email } = req.body;
 
   const existingUser = await prisma.user.findUnique({
