@@ -30,6 +30,7 @@ export let appState = {
   taskLocationColumn: "newTaskColumn",
   taskName: "",
   userSettings: {
+    isLoggedIn: false,
     profileName: "",
     theme: {
       colorName: "mint green",
@@ -106,6 +107,11 @@ export function setAppState(state, value = "") {
     };
   } else if (state === "errorSuccessMessage") {
     appState = { ...appState, errorSuccessMessage: value };
+  } else if (state === "isLoggedIn") {
+    appState = {
+      ...appState,
+      userSettings: { ...appState.userSettings, isLoggedIn: value },
+    };
   } else if (state === "profileName") {
     appState = {
       ...appState,
