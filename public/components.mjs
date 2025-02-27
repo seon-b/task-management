@@ -152,3 +152,10 @@ export function isContentObjectValid(contentObject) {
     return false;
   }
 }
+
+export function initializeTaskList(initializationColumn) {
+  if (appState.componentList.length === 0) return;
+  appState.componentList.forEach((task) => {
+    addComponent("#taskComponent", initializationColumn, task, "initialize");
+  });
+}
