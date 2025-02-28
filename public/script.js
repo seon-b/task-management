@@ -8,7 +8,7 @@ import {
 const currentTaskColumn = document.querySelector("[data-current-task]");
 const completedTaskColumn = document.querySelector("[data-completed-task]");
 const createTaskButton = document.querySelector(".submitButton");
-const dashboardLink = document.querySelector("#navDashboardLink");
+
 const errorMessage = document.querySelector(".errorMessage");
 let dragAndDropElements;
 
@@ -110,9 +110,6 @@ function setDragAndDropElements() {
   dragAndDropElements = document.querySelectorAll(".taskContainer");
 }
 
-dashboardLink.addEventListener("click", () => {
-  window.location.assign("/dashboard");
-});
 loginLink.addEventListener("click", () => {
   window.location.assign("/login");
 });

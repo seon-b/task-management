@@ -1,9 +1,11 @@
 import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
 import { initializeTaskList, removeAllComponents } from "./components.mjs";
 
+const dashboardLink = document.querySelector("#navDashboardLink");
 const newTaskColumn = document.querySelector("[data-new-task]");
 const saveSettingsButton = document.querySelector(".saveSettingsButton");
 const saveTasksButton = document.querySelector(".saveTasksButton");
+const logoutLink = document.querySelector("#navLogoutLink");
 const profileName = document.querySelector(".profileNameArea");
 const themeSelect = document.querySelector("#themeSelect");
 const root = document.documentElement;
@@ -142,6 +144,9 @@ async function updateUserLoginState() {
   }
 }
 
+dashboardLink.addEventListener("click", () => {
+  window.location.assign("/dashboard");
+});
 window.addEventListener("load", getCurrentUserData);
 saveSettingsButton.addEventListener("click", saveUserSettings);
 saveTasksButton.addEventListener("click", saveCurrentTasks);
