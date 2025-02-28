@@ -42,13 +42,14 @@ function clearForm() {
 }
 
 function displayErrorMessage(message) {
-  setAppState("errorSucessMessage", message);
-  errorMessage.textContent = appState.errorSucessMessage;
-  errorMessage.parentElement.classList.remove("errorAreaHidden");
+  setAppState("errorSuccessMessage", message);
+  errorMessage.textContent = appState.errorSuccessMessage;
+  errorMessage.parentElement.parentElement.classList.remove("errorAreaHidden");
+
   setTimeout(() => {
-    errorMessage.parentElement.classList.add("errorAreaHidden");
-    setAppState("errorSucessMessage", "");
-    errorMessage.textContent = appState.errorSucessMessage;
+    errorMessage.parentElement.parentElement.classList.add("errorAreaHidden");
+    setAppState("errorSuccessMessage", "");
+    errorMessage.textContent = appState.errorSuccessMessage;
   }, 1000);
 }
 

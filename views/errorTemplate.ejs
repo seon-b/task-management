@@ -2,5 +2,8 @@
   <% if (message) { %>
   <div><h4 class="errorMessage"><%= message %></h4></div>
 
-  <% } %>
+  <% } else { %>
+
+  <div><h4 class="errorMessage"></h4></div>
+  <%} %>
 </section>
