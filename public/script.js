@@ -1,5 +1,9 @@
 import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
-import { addComponent, removeComponent } from "./components.mjs";
+import {
+  addComponent,
+  removeComponent,
+  initializeTaskList,
+} from "./components.mjs";
 
 const currentTaskColumn = document.querySelector("[data-current-task]");
 const completedTaskColumn = document.querySelector("[data-completed-task]");
@@ -27,7 +31,7 @@ createTaskButton.addEventListener("click", (e) => {
   initializeDragAndDrop();
 });
 
-initializeTaskList();
+initializeTaskList(newTaskColumn);
 setDragAndDropElements();
 initializeDragAndDrop();
 
@@ -76,13 +80,6 @@ function getUserSelection(e) {
     setAppState("taskStatus", e.target.value);
   } else {
   }
-}
-
-function initializeTaskList() {
-  if (appState.componentList.length === 0) return;
-  appState.componentList.forEach((task) => {
-    addComponent("#taskComponent", newTaskColumn, task, "initialize");
-  });
 }
 
 function initializeDragAndDrop() {
