@@ -97,7 +97,7 @@
   height: 40px;
   justify-content: center;
   margin: 0.3em auto;
-  width: 80%;
+  width: 25%;
 }
 
 .errorAreaHidden {
@@ -228,6 +228,21 @@ input {
 
   .dropzone {
     min-height: auto;
+  }
+}
+
+@media (width < 768px) {
+  #errorArea {
+    align-items: center;
+    border: none;
+    background-color: var(--errorColor);
+    border-radius: calc(var(--buttonBorderRadius) * 2);
+    color: white;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    margin: 0.3em auto;
+    width: 80%;
   }
 }
 
