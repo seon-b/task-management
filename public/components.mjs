@@ -134,6 +134,12 @@ function setComponentId(component, value) {
   setAppState("componentIdListAdd", value);
 }
 
+export function removeAllComponents(column) {
+  while (column.lastChild) {
+    column.removeChild(column.lastChild);
+  }
+}
+
 export function removeComponent(componentId) {
   let componentToRemove = document.querySelector(
     `[data-task-id = "${componentId}"]`
