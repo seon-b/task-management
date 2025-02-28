@@ -18,8 +18,8 @@ router.post("/get-user-data", async (req, res) => {
   if (existingUser === null) {
     return res.json({ error: "User does not exist" }).status(404);
   } else {
-    const { tasks, settings } = existingUser;
-    let userSettingsObject = { tasks, settings };
+    const { isLoggedIn, tasks, settings } = existingUser;
+    let userSettingsObject = { isLoggedIn, tasks, settings };
     return res.json(userSettingsObject);
   }
 });
@@ -62,7 +62,27 @@ router.put("/save-user-settings", async (req, res) => {
     where: { email: email },
     data: { settings: settings },
   });
-  res.json(updatedUserSettings);
+  res.json({ message: "Users settings saved" }).status(204);
+});
+
+router.put("/update-login-state", async (req, res) => {
+  const { email, loginState } = req.body;
+
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (existingUser === null)
+    return res.json({ error: "User does not exist" }).status(404);
+
+  const updatedState = await prisma.user.update({
+    where: { email: email },
+    data: { isLoggedIn: loginState },
+  });
+
+  res.json({ message: "Login state updated" }).status(204);
 });
 
 module.exports = router;
