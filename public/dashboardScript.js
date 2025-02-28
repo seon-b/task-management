@@ -1,5 +1,7 @@
 import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
+import { initializeTaskList, removeAllComponents } from "./components.mjs";
 
+const newTaskColumn = document.querySelector("[data-new-task]");
 const saveSettingsButton = document.querySelector(".saveSettingsButton");
 const saveTasksButton = document.querySelector(".saveTasksButton");
 const profileName = document.querySelector(".profileNameArea");
@@ -8,6 +10,7 @@ const root = document.documentElement;
 
 let initialUserSettings = null;
 let initialUserTasks = null;
+let initialLoginState = null;
 let userEmail = "";
 
 function deleteTask() {}
@@ -34,9 +37,14 @@ async function getCurrentUserData() {
 
     initialUserTasks = data.tasks;
     initialUserSettings = data.settings;
+    initialLoginState = data.isLoggedIn;
 
     setAppState("componentListInitialize", initialUserTasks);
     setAppState("userSettings", initialUserSettings);
+    setAppState("isLoggedIn", initialLoginState);
+
+    removeAllComponents(newTaskColumn);
+    initializeTaskList(newTaskColumn);
 
     return data;
   } catch (error) {
@@ -101,7 +109,40 @@ async function saveUserSettings() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", getCurrentUserData);
+async function updateUserLoginState() {
+  setAppState("profileName", profileName.innerHTML);
+  userEmail = appState.userSettings.profileName;
+  let currentLoginState = appState.isLoggedIn;
+
+  if (appState.isLoggedIn === true) {
+    currentLoginState = false;
+  } else {
+    currentLoginState = true;
+  }
+
+  try {
+    const res = await fetch("/api/users/update-login-state", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        loginState: currentLoginState,
+      }),
+    });
+    if (!res.ok) {
+      setAppState("errorSuccessMessage", "login state could not be updated");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("login state could not be updated", error);
+  }
+}
+
+window.addEventListener("load", getCurrentUserData);
 saveSettingsButton.addEventListener("click", saveUserSettings);
 saveTasksButton.addEventListener("click", saveCurrentTasks);
 themeSelect.addEventListener("change", (e) => selectTheme(e, root));
