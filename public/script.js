@@ -12,7 +12,6 @@ const createTaskButton = document.querySelector(".submitButton");
 const errorMessage = document.querySelector(".errorMessage");
 let dragAndDropElements;
 
-const loginLink = document.querySelector("#navLoginLink");
 const navBrandLink = document.querySelector("#navBrandLink");
 
 const dragAndDropElementContainers = document.querySelectorAll(".dropzone");
@@ -111,12 +110,10 @@ function setDragAndDropElements() {
   dragAndDropElements = document.querySelectorAll(".taskContainer");
 }
 
-loginLink.addEventListener("click", () => {
-  window.location.assign("/login");
-});
 navBrandLink.addEventListener("click", () => {
   window.location.assign("/");
 });
+
 taskNameInput.addEventListener("change", (e) => getUserInput(e));
 taskDeadlineInput.addEventListener("change", (e) => getUserInput(e));
 taskContentInput.addEventListener("change", (e) => getUserInput(e));
