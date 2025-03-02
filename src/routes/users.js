@@ -85,4 +85,13 @@ router.put("/update-login-state", async (req, res) => {
   res.json({ message: "Login state updated" }).status(204);
 });
 
+router.post("/logout", (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
 module.exports = router;

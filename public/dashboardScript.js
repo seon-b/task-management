@@ -54,6 +54,28 @@ async function getCurrentUserData() {
   }
 }
 
+async function logout() {
+  userEmail = appState.userSettings.profileName;
+  try {
+    const res = await fetch("/api/users/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      setAppState("errorSuccessMessage", "User could not be logged out");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("User could not be logged out", error);
+    console.error(error);
+  }
+}
+
 async function saveCurrentTasks() {
   setAppState("profileName", profileName.innerHTML);
   userEmail = appState.userSettings.profileName;
@@ -147,6 +169,8 @@ async function updateUserLoginState() {
 dashboardLink.addEventListener("click", () => {
   window.location.assign("/dashboard");
 });
+
+logoutLink.addEventListener("click", logout);
 window.addEventListener("load", getCurrentUserData);
 saveSettingsButton.addEventListener("click", saveUserSettings);
 saveTasksButton.addEventListener("click", saveCurrentTasks);
