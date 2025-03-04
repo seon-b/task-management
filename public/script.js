@@ -1,8 +1,9 @@
 import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
 import {
   addComponent,
-  removeComponent,
   initializeTaskList,
+  initializeDragAndDrop,
+  removeComponent,
 } from "./components.mjs";
 
 const currentTaskColumn = document.querySelector("[data-current-task]");
@@ -26,13 +27,13 @@ createTaskButton.addEventListener("click", (e) => {
   addComponent("#taskComponent", newTaskColumn, appState);
   setAppState("clearForm");
   clearForm();
-  setDragAndDropElements();
-  initializeDragAndDrop();
+  setDragAndDropElements(dragAndDropElements);
+  initializeDragAndDrop(dragAndDropElements, dragAndDropElementContainers);
 });
 
 initializeTaskList(newTaskColumn);
-setDragAndDropElements();
-initializeDragAndDrop();
+setDragAndDropElements(dragAndDropElements);
+initializeDragAndDrop(dragAndDropElements, dragAndDropElementContainers);
 
 function clearForm() {
   taskContentInput.value = appState.taskContent;
@@ -80,30 +81,6 @@ function getUserSelection(e) {
     setAppState("taskStatus", e.target.value);
   } else {
   }
-}
-
-function initializeDragAndDrop() {
-  dragAndDropElements.forEach((element) => {
-    if (!element.classList.contains("dragAndDropEnabled")) {
-      element.addEventListener("dragstart", () => {
-        element.classList.add("draggingComponent");
-      });
-      element.addEventListener("dragend", () => {
-        element.classList.remove("draggingComponent");
-      });
-      element.classList.add("dragAndDropEnabled");
-    } else {
-    }
-  });
-
-  dragAndDropElementContainers.forEach((element) => {
-    element.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      let currentDraggingComponent =
-        document.querySelector(".draggingComponent");
-      element.appendChild(currentDraggingComponent);
-    });
-  });
 }
 
 function setDragAndDropElements() {

@@ -1,7 +1,12 @@
 import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
-import { initializeTaskList, removeAllComponents } from "./components.mjs";
+import {
+  initializeTaskList,
+  initializeDragAndDrop,
+  removeAllComponents,
+} from "./components.mjs";
 
 const dashboardLink = document.querySelector("#navDashboardLink");
+const dragAndDropElementContainers = document.querySelectorAll(".dropzone");
 const newTaskColumn = document.querySelector("[data-new-task]");
 const saveSettingsButton = document.querySelector(".saveSettingsButton");
 const saveTasksButton = document.querySelector(".saveTasksButton");
@@ -10,6 +15,7 @@ const profileName = document.querySelector(".profileNameArea");
 const themeSelect = document.querySelector("#themeSelect");
 const root = document.documentElement;
 
+let dragAndDropElements;
 let initialUserSettings = null;
 let initialUserTasks = null;
 let initialLoginState = null;
@@ -47,6 +53,8 @@ async function getCurrentUserData() {
 
     removeAllComponents(newTaskColumn);
     initializeTaskList(newTaskColumn);
+    setDragAndDropElements(dragAndDropElements);
+    initializeDragAndDrop(dragAndDropElements, dragAndDropElementContainers);
 
     return data;
   } catch (error) {
@@ -166,6 +174,10 @@ async function updateUserLoginState() {
   } catch (error) {
     console.error("login state could not be updated", error);
   }
+}
+
+function setDragAndDropElements() {
+  dragAndDropElements = document.querySelectorAll(".taskContainer");
 }
 
 dashboardLink.addEventListener("click", () => {

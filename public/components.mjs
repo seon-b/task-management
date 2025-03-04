@@ -134,6 +134,40 @@ function setComponentId(component, value) {
   setAppState("componentIdListAdd", value);
 }
 
+export function initializeDragAndDrop(
+  dragAndDropElements,
+  dragAndDropElementContainers
+) {
+  dragAndDropElements.forEach((element) => {
+    if (!element.classList.contains("dragAndDropEnabled")) {
+      element.addEventListener("dragstart", () => {
+        element.classList.add("draggingComponent");
+      });
+      element.addEventListener("dragend", () => {
+        element.classList.remove("draggingComponent");
+      });
+      element.classList.add("dragAndDropEnabled");
+    } else {
+    }
+  });
+
+  dragAndDropElementContainers.forEach((element) => {
+    element.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      let currentDraggingComponent =
+        document.querySelector(".draggingComponent");
+      element.appendChild(currentDraggingComponent);
+    });
+  });
+}
+
+export function initializeTaskList(initializationColumn) {
+  if (appState.componentList.length === 0) return;
+  appState.componentList.forEach((task) => {
+    addComponent("#taskComponent", initializationColumn, task, "initialize");
+  });
+}
+
 export function removeAllComponents(column) {
   while (column.lastChild) {
     column.removeChild(column.lastChild);
@@ -157,11 +191,4 @@ export function isContentObjectValid(contentObject) {
   ) {
     return false;
   }
-}
-
-export function initializeTaskList(initializationColumn) {
-  if (appState.componentList.length === 0) return;
-  appState.componentList.forEach((task) => {
-    addComponent("#taskComponent", initializationColumn, task, "initialize");
-  });
 }
