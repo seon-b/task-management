@@ -59,6 +59,7 @@ async function logout() {
   try {
     const res = await fetch("/api/users/logout", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -69,9 +70,10 @@ async function logout() {
     }
 
     const data = await res.json();
-    return data;
+    data.isLoggedOut
+      ? window.location.replace("/")
+      : console.error("User could not be logged out");
   } catch (error) {
-    console.error("User could not be logged out", error);
     console.error(error);
   }
 }
