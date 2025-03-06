@@ -149,13 +149,23 @@ input {
   border-radius: var(--taskColumnBorderRadius);
 }
 
-/* .newTaskForm {
-
-} */
+.newTaskForm {
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgb(0 0 0/ 10%);
+  padding: 1.12em;
+}
 
 .newTaskForm .formGroup {
   padding: 0.5em;
 }
+
+.newTaskForm .formGroup #taskContent {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 0.5em;
+  width: 100%;
+}
+
 .profileNameArea {
   display: none;
 }
@@ -213,6 +223,10 @@ input {
   justify-content: space-between;
   align-items: center;
   border-bottom: 5em;
+}
+
+textarea {
+  resize: none;
 }
 
 @media screen and (max-width: 600px) {
