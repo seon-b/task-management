@@ -24,6 +24,25 @@
   --taskColumnBorderRadius: calc(var(--buttonBorderRadius) * 2);
 }
 
+.button {
+  background-color: var(--navbarColor);
+  border: 2px solid var(--navbarColor);
+  border-radius: var(--buttonBorderRadius);
+  color: var(--navbarTextColor);
+  padding: var(--buttonPadding);
+}
+
+.button:hover {
+  background-color: white;
+  border-color: white;
+  color: var(--navbarColor);
+  cursor: pointer;
+  outline: auto;
+  outline-color: var(--navbarColor);
+  outline-offset: 0.2em;
+  outline-width: thick;
+}
+
 .content {
   border-top: 2px solid var(--navbarColor);
   margin-top: 0.3em;
@@ -104,13 +123,13 @@
   visibility: hidden;
 }
 
+input {
+  accent-color: var(--navbarColor);
+}
+
 #taskManagementArea h4 {
   display: flex;
   justify-self: center;
-}
-
-input {
-  accent-color: var(--navbarColor);
 }
 
 #navbar {
@@ -169,24 +188,6 @@ input {
 .profileNameArea {
   display: none;
 }
-.button {
-  background-color: var(--navbarColor);
-  border: 2px solid var(--navbarColor);
-  border-radius: var(--buttonBorderRadius);
-  color: var(--navbarTextColor);
-  padding: var(--buttonPadding);
-}
-
-.button:hover {
-  background-color: white;
-  border-color: white;
-  color: var(--navbarColor);
-  cursor: pointer;
-  outline: auto;
-  outline-color: var(--navbarColor);
-  outline-offset: 0.2em;
-  outline-width: thick;
-}
 
 #taskManagementArea {
   display: grid;
@@ -225,6 +226,12 @@ input {
 
 textarea {
   resize: none;
+}
+
+.themeButton {
+  margin-top: 0.75em;
+  margin-left: 0.25em;
+  position: fixed;
 }
 
 @media screen and (max-width: 600px) {
