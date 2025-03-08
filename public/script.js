@@ -8,19 +8,19 @@ import {
 const currentTaskColumn = document.querySelector("[data-current-task]");
 const completedTaskColumn = document.querySelector("[data-completed-task]");
 const createTaskButton = document.querySelector(".submitButton");
-
 const errorMessage = document.querySelector(".errorMessage");
 
 let dragAndDropElements;
 
 const loginLink = document.querySelector("#navLoginLink");
 const navBrandLink = document.querySelector("#navBrandLink");
-
 const dragAndDropElementContainers = document.querySelectorAll(".dropzone");
 const newTaskColumn = document.querySelector("[data-new-task]");
 const taskNameInput = document.querySelector("#taskName");
 const taskDeadlineInput = document.querySelector("#taskDeadline");
 const taskContentInput = document.querySelector("#taskContent");
+const themeButton = document.querySelector(".themeButton");
+
 const root = document.documentElement;
 
 createTaskButton.addEventListener("click", (e) => {
@@ -121,3 +121,6 @@ navBrandLink.addEventListener("click", () => {
 taskNameInput.addEventListener("change", (e) => getUserInput(e));
 taskDeadlineInput.addEventListener("change", (e) => getUserInput(e));
 taskContentInput.addEventListener("change", (e) => getUserInput(e));
+themeButton.addEventListener("click", () =>
+  selectTheme(appState.userSettings.theme.colorName, root)
+);

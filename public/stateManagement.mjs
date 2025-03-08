@@ -139,13 +139,20 @@ export function setAppState(state, value = "") {
   }
 }
 
-export function selectTheme(e, root) {
+export function selectTheme(currentTheme = "mint green", root) {
+  let index;
   let themeArray = getAppThemes();
-  let selectedThemeIndex = themeArray.findIndex(
-    (theme) => theme.colorName === e.target.value
+  let currentThemeIndex = themeArray.findIndex(
+    (theme) => theme.colorName === currentTheme
   );
 
-  let selectedTheme = themeArray[selectedThemeIndex];
+  if (currentThemeIndex === themeArray.length - 1) {
+    index = 0;
+  } else {
+    index = currentThemeIndex + 1;
+  }
+
+  let selectedTheme = themeArray[index];
   setAppState("theme", selectedTheme);
   updateTheme(root);
 }
