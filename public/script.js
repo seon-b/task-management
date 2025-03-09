@@ -118,7 +118,7 @@ function setDragAndDropElements() {
 }
 
 loginLink.addEventListener("click", () => {
-  displayErrorMessage(errorMessage, "login not available");
+  displayErrorMessage(errorMessage, "Login not available");
 });
 navBrandLink.addEventListener("click", () => {
   window.location.assign("/");

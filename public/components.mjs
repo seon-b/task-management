@@ -162,7 +162,7 @@ export function isContentObjectValid(contentObject) {
     contentObject.taskDeadline === "" ||
     contentObject.taskName === ""
   ) {
-    setAppState("errorSuccessMessage", "Cannot Have Empty Input Fields");
+    setAppState("errorSuccessMessage", "Cannot have empty input fields");
     return false;
   } else if (contentObject.taskContent.length > 100) {
     setAppState(
