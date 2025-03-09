@@ -19,6 +19,7 @@ const newTaskColumn = document.querySelector("[data-new-task]");
 const taskNameInput = document.querySelector("#taskName");
 const taskDeadlineInput = document.querySelector("#taskDeadline");
 const taskContentInput = document.querySelector("#taskContent");
+const taskManagementArea = document.querySelector("#taskManagementArea");
 const themeButton = document.querySelector(".themeButton");
 
 const root = document.documentElement;
@@ -55,7 +56,12 @@ function displayErrorMessage(message) {
 }
 
 function deleteTask(e) {
-  let taskId = e.target.parentElement.parentElement.dataset.taskId;
+  let taskId;
+  if (e.target.classList.contains("deleteButton")) {
+    taskId = e.target.parentElement.parentElement.dataset.taskId;
+  } else {
+    return;
+  }
 
   removeComponent(taskId);
 }
@@ -118,11 +124,6 @@ function setDragAndDropElements() {
   dragAndDropElements = document.querySelectorAll(".taskContainer");
 }
 
-const deleteButtonList = document.querySelectorAll(".deleteButton");
-
-deleteButtonList.forEach((deleteButton) =>
-  deleteButton.addEventListener("click", (e) => deleteTask(e))
-);
 loginLink.addEventListener("click", () => {
   displayErrorMessage("login not available");
 });
@@ -130,6 +131,7 @@ navBrandLink.addEventListener("click", () => {
   window.location.assign("/");
 });
 taskNameInput.addEventListener("change", (e) => getUserInput(e));
+taskManagementArea.addEventListener("click", (e) => deleteTask(e));
 taskDeadlineInput.addEventListener("change", (e) => getUserInput(e));
 taskContentInput.addEventListener("change", (e) => getUserInput(e));
 themeButton.addEventListener("click", () =>
