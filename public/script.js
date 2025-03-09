@@ -54,6 +54,12 @@ function displayErrorMessage(message) {
   }, 1000);
 }
 
+function deleteTask(e) {
+  let taskId = e.target.parentElement.parentElement.dataset.taskId;
+
+  removeComponent(taskId);
+}
+
 function getUserInput(e) {
   let idName = "#";
   let inputLabel = e.target.name;
@@ -112,6 +118,11 @@ function setDragAndDropElements() {
   dragAndDropElements = document.querySelectorAll(".taskContainer");
 }
 
+const deleteButtonList = document.querySelectorAll(".deleteButton");
+
+deleteButtonList.forEach((deleteButton) =>
+  deleteButton.addEventListener("click", (e) => deleteTask(e))
+);
 loginLink.addEventListener("click", () => {
   displayErrorMessage("login not available");
 });

@@ -145,8 +145,9 @@ export function removeComponent(componentId) {
     `[data-task-id = "${componentId}"]`
   );
 
-  componentToRemove.parentElement.removeChild(componentToRemove);
   setAppState("componentIdListRemove", componentId);
+  setAppState("componentListRemove", componentId);
+  componentToRemove.parentElement.removeChild(componentToRemove);
 }
 
 export function isContentObjectValid(contentObject) {

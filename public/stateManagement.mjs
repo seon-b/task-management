@@ -1,6 +1,6 @@
 export let appState = {
   errorSuccessMessage: "",
-  componentIdList: ["gYxBiz", "8nhpUE", "Z8WKIn"],
+  componentIdList: [],
   componentList: [
     {
       taskId: "gYxBiz",
@@ -84,17 +84,11 @@ export function setAppState(state, value = "") {
     let newArray = appState.componentList;
     newArray.push(value);
   } else if (state === "componentIdListRemove") {
-    appState.componentIdList.find((id, index) => {
-      if (id === value) {
-        appState.componentIdList.splice(index, 1);
-      }
-    });
+    let index = appState.componentIdList.indexOf(value);
+    appState.componentIdList.splice(index, 1);
   } else if (state === "componentListRemove") {
-    appState.componentList.find((id, index) => {
-      if (id === value) {
-        appState.componentList.splice(index, 1);
-      }
-    });
+    let index = appState.componentList.indexOf(value);
+    appState.componentList.splice(index, 1);
   } else if (state === "componentListInitialize") {
     appState.componentList = [];
     appState = { ...appState, componentList: value };
