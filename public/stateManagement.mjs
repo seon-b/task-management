@@ -62,10 +62,28 @@ export function getAppThemes() {
       lValue: "33%",
     },
     {
+      colorName: "cyan",
+      hValue: "193",
+      sValue: "100%",
+      lValue: "46%",
+    },
+    {
       colorName: "purple",
       hValue: "276",
       sValue: "66%",
       lValue: "40%",
+    },
+    {
+      colorName: "lavender",
+      hValue: "275",
+      sValue: "57%",
+      lValue: "68%",
+    },
+    {
+      colorName: "pink",
+      hValue: "330",
+      sValue: "100%",
+      lValue: "71%",
     },
   ];
 
