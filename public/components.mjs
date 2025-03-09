@@ -1,4 +1,8 @@
-import { appState, setAppState } from "./stateManagement.mjs";
+import {
+  appState,
+  displayErrorMessage,
+  setAppState,
+} from "./stateManagement.mjs";
 
 let idHashMap = {
   1: 48,
@@ -69,9 +73,11 @@ export function addComponent(
   templateId,
   taskColumn,
   contentObject,
+  errorMessage,
   addComponentMode = ""
 ) {
-  if (isContentObjectValid(contentObject) === false) return;
+  if (isContentObjectValid(contentObject) === false)
+    return displayErrorMessage(errorMessage, appState.errorSuccessMessage);
   if (addComponentMode === "initialize") {
     let taskTemplate = document.querySelector(templateId);
     let newComponent = taskTemplate.content.cloneNode(true);
@@ -156,7 +162,21 @@ export function isContentObjectValid(contentObject) {
     contentObject.taskDeadline === "" ||
     contentObject.taskName === ""
   ) {
+    setAppState("errorSuccessMessage", "Cannot Have Empty Input Fields");
     return false;
+  } else if (contentObject.taskContent.length > 100) {
+    setAppState(
+      "errorSuccessMessage",
+      "Cannot have more than a 100 characters in description"
+    );
+    return false;
+  } else if (contentObject.taskName.length > 20) {
+    setAppState(
+      "errorSuccessMessage",
+      "Cannot have more than a 10 characters in task name"
+    );
+    return false;
+  } else {
   }
 }
 

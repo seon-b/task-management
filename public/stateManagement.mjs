@@ -41,6 +41,18 @@ export let appState = {
   },
 };
 
+export function displayErrorMessage(errorArea, message) {
+  setAppState("errorSuccessMessage", message);
+  errorArea.textContent = appState.errorSuccessMessage;
+  errorArea.parentElement.parentElement.classList.remove("errorAreaHidden");
+
+  setTimeout(() => {
+    errorArea.parentElement.parentElement.classList.add("errorAreaHidden");
+    setAppState("errorSuccessMessage", "");
+    errorArea.textContent = appState.errorSuccessMessage;
+  }, 1000);
+}
+
 export function getAppThemes() {
   let themeArray = [
     {

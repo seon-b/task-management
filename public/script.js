@@ -1,4 +1,9 @@
-import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
+import {
+  appState,
+  displayErrorMessage,
+  selectTheme,
+  setAppState,
+} from "./stateManagement.mjs";
 import {
   addComponent,
   removeComponent,
@@ -26,7 +31,7 @@ const root = document.documentElement;
 
 createTaskButton.addEventListener("click", (e) => {
   e.preventDefault();
-  addComponent("#taskComponent", newTaskColumn, appState);
+  addComponent("#taskComponent", newTaskColumn, appState, errorMessage);
   setAppState("clearForm");
   clearForm();
   setDragAndDropElements();
@@ -41,18 +46,6 @@ function clearForm() {
   taskContentInput.value = appState.taskContent;
   taskDeadlineInput.value = appState.taskDeadline;
   taskNameInput.value = appState.taskContent;
-}
-
-function displayErrorMessage(message) {
-  setAppState("errorSuccessMessage", message);
-  errorMessage.textContent = appState.errorSuccessMessage;
-  errorMessage.parentElement.parentElement.classList.remove("errorAreaHidden");
-
-  setTimeout(() => {
-    errorMessage.parentElement.parentElement.classList.add("errorAreaHidden");
-    setAppState("errorSuccessMessage", "");
-    errorMessage.textContent = appState.errorSuccessMessage;
-  }, 1000);
 }
 
 function deleteTask(e) {
@@ -125,7 +118,7 @@ function setDragAndDropElements() {
 }
 
 loginLink.addEventListener("click", () => {
-  displayErrorMessage("login not available");
+  displayErrorMessage(errorMessage, "login not available");
 });
 navBrandLink.addEventListener("click", () => {
   window.location.assign("/");
