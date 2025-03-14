@@ -67,7 +67,7 @@ async function logout() {
   try {
     const res = await fetch("/api/users/logout", {
       method: "POST",
-      credentials: "include",
+      credentials: "same-origin",
       headers: {
         "Content-Type": "application/json",
       },
