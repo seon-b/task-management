@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const express = require("express");
 const morgan = require("morgan");
 const session = require("express-session");
@@ -54,4 +52,5 @@ app.get("/login-failed", (req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`Task Management App listening on port ${PORT}`);
+  console.log(`URL: http://localhost:${PORT}`);
 });
