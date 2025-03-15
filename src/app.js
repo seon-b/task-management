@@ -54,4 +54,5 @@ app.get("/login-failed", (req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`Task Management App listening on port ${PORT}`);
+  console.log("URL:", `http://localhost:${PORT}`);
 });
