@@ -4,11 +4,11 @@ const express = require("express");
 const morgan = require("morgan");
 const session = require("express-session");
 const passport = require("passport");
-require("../src/auth-strategies/passportLocal");
+require("./auth-strategies/passportLocal");
 
 const helmet = require("helmet");
 const path = require("path");
-const { validateUser } = require("../src/auth-strategies/passportLocal");
+const { validateUser } = require("./auth-strategies/passportLocal");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
