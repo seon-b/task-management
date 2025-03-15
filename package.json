@@ -4,8 +4,8 @@
   "description": "Task manager app",
   "main": "app.js",
   "scripts": {
-    "start": "node ./src/index.js",
-    "dev": "nodemon ./src/index.js"
+    "start": "node --env-file=.env ./src/index.js",
+    "dev": "nodemon --env-file=.env ./src/index.js"
   },
   "author": "",
   "license": "",
