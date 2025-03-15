@@ -1,6 +1,6 @@
-# Task Management
+# Task Management (Demo Mode)
 
-Task Management is a web application that enables users to create tasks and set deadlines for when the task should be completed.
+Task Management is a web application that enables users to create tasks and set deadlines for when the task should be completed. The demo mode has the login, database and authentication features disabled. The app is fully functional but the user will not be able to save data and will reset if the app is refreshed.
 
 ## Description
 
@@ -25,8 +25,8 @@ When a new task is created it goes into the "new task column" by default. To cha
 - [helmet](https://helmetjs.github.io/) - Used to set HTTP response headers
 - [morgan](https://github.com/expressjs/morgan#readme) - Express.js middleware for logging HTTP requests and errors
 - [passport](https://www.passportjs.org/) - Node.js middleware for authenticaton
-- [dotenv](https://github.com/motdotla/dotenv#readme) - Used to load environment variables from .env for Node.js apps
 - [nodemon](https://nodemon.io/) - Used to automatically reload Node.js severs when an app is in development
+- [postgresql](https://www.postgresql.org/) - object-relational database system
 
 ## Upcoming Features
 
