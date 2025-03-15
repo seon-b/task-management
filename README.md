@@ -1,6 +1,6 @@
 # Task Management (Demo Mode)
 
-Task Management is a web application that enables users to create tasks and set deadlines for when the task should be completed. The demo mode has the login, database and authentication features disabled. The app is fully functional but the user will not be able to save data and will reset if the app is refreshed.
+Task Management is a web application that enables users to create tasks and set deadlines for when the task should be completed. The demo mode has the login, database and authentication features disabled. The app is fully functional but the user will not be able to save data and the current state of the app will reset if the app is refreshed.
 
 ## Description
 
