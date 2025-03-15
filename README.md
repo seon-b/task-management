@@ -26,7 +26,7 @@ When a new task is created it goes into the "new task column" by default. To cha
 - [morgan](https://github.com/expressjs/morgan#readme) - Express.js middleware for logging HTTP requests and errors
 - [passport](https://www.passportjs.org/) - Node.js middleware for authenticaton
 - [nodemon](https://nodemon.io/) - Used to automatically reload Node.js severs when an app is in development
-- [postgresql](https://www.postgresql.org/) - object-relational database system
+- [postgresql](https://www.postgresql.org/) - Object-relational database system
 
 ## Upcoming Features
 

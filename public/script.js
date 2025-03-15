@@ -59,6 +59,24 @@ function deleteTask(e) {
   removeComponent(taskId);
 }
 
+function formatTaskDeadlineDate(date) {
+  let dateArray = date.split("-");
+  let newDate = "";
+  let day = dateArray.pop();
+  let month = dateArray.pop();
+  let year = dateArray.pop();
+
+  if (month[0] === "0") {
+    let monthArray = month.split("");
+    month = monthArray[1];
+  }
+
+  newDate += month;
+  newDate = newDate + "/" + day;
+  newDate = newDate + "/" + year;
+  return newDate;
+}
+
 function getUserInput(e) {
   let idName = "#";
   let inputLabel = e.target.name;
@@ -70,7 +88,7 @@ function getUserInput(e) {
     setAppState("taskName", inputValue);
   } else if (inputLabel === "taskDeadline") {
     let element = document.querySelector(idName + inputLabel);
-    inputValue = element.value;
+    inputValue = formatTaskDeadlineDate(element.value);
     setAppState("taskDeadline", inputValue);
   } else if (inputLabel === "taskContent") {
     let element = document.querySelector(idName + inputLabel);
