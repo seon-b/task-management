@@ -2,6 +2,10 @@
 
 Task Management is a web application that enables users to create tasks and set deadlines for when the task should be completed. The demo mode has the login, database and authentication features disabled. The app is fully functional but the user will not be able to save data and the current state of the app will reset if the app is refreshed.
 
+## Project Demo
+
+https://task-management-ftim.onrender.com
+
 ## Description
 
 Task Management is mainly designed for desktop devices and is mobile responsive. Users are able to manage tasks by using the drag and drop feature. This feature was implemented using the [Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API). The feature does not work on mobile devices currently.
