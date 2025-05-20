@@ -6,7 +6,7 @@
 :root {
   --buttonBorderRadius: 0.2em;
   --buttonPadding: 0.4em;
-  --errorColor: rgb(255, 68, 68);
+  --errorColor: var(--navbarColor);
   --hValue: 174;
   --sValue: 62%;
   --lValue: 47%;
@@ -115,10 +115,10 @@ html {
 
 #errorArea {
   align-items: center;
-  border: none;
-  background-color: var(--errorColor);
+  border: 2px solid var(--errorColor);
+  background-color: white;
   border-radius: calc(var(--buttonBorderRadius) * 2);
-  color: white;
+  color: var(--errorColor);
   display: flex;
   height: 40px;
   justify-content: center;
