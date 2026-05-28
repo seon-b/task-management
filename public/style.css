@@ -24,6 +24,52 @@
   --taskColumnBorderRadius: calc(var(--buttonBorderRadius) * 2);
 }
 
+html {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+}
+
+.button {
+  background-color: var(--navbarColor);
+  border: 2px solid var(--navbarColor);
+  border-radius: var(--buttonBorderRadius);
+  color: var(--navbarTextColor);
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  padding: var(--buttonPadding);
+}
+
+.button:hover {
+  background-color: white;
+  border-color: white;
+  color: var(--navbarColor);
+  cursor: pointer;
+  outline: auto;
+  outline-color: var(--navbarColor);
+  outline-offset: 0.2em;
+  outline-width: thick;
+}
+
 .content {
   border-top: 2px solid var(--navbarColor);
   margin-top: 0.3em;
@@ -89,7 +135,7 @@
 
 #errorArea {
   align-items: center;
-  border: none;
+  border: 2px solid var(--errorColor);
   background-color: white;
   border-radius: calc(var(--buttonBorderRadius) * 2);
   color: var(--errorColor);
@@ -104,13 +150,13 @@
   visibility: hidden;
 }
 
+input {
+  accent-color: var(--navbarColor);
+}
+
 #taskManagementArea h4 {
   display: flex;
   justify-self: center;
-}
-
-input {
-  accent-color: var(--navbarColor);
 }
 
 #navbar {
@@ -149,35 +195,25 @@ input {
   border-radius: var(--taskColumnBorderRadius);
 }
 
-/* .newTaskForm {
-
-} */
+.newTaskForm {
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgb(0 0 0/ 10%);
+  padding: 1.12em;
+}
 
 .newTaskForm .formGroup {
   padding: 0.5em;
 }
-.profileNameArea {
-  display: none;
-}
-.submitButton,
-.loginSubmitButton {
-  background-color: var(--navbarColor);
-  border: 2px solid var(--navbarColor);
-  border-radius: var(--buttonBorderRadius);
-  color: var(--navbarTextColor);
-  padding: var(--buttonPadding);
+
+.newTaskForm .formGroup #taskContent {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 0.5em;
+  width: 100%;
 }
 
-.submitButton:hover,
-.loginSubmitButton:hover {
-  background-color: white;
-  border-color: white;
-  color: var(--navbarColor);
-  cursor: pointer;
-  outline: auto;
-  outline-color: var(--navbarColor);
-  outline-offset: 0.2em;
-  outline-width: thick;
+.profileNameArea {
+  display: none;
 }
 
 #taskManagementArea {
@@ -213,6 +249,16 @@ input {
   justify-content: space-between;
   align-items: center;
   border-bottom: 5em;
+}
+
+textarea {
+  resize: none;
+}
+
+.themeButton {
+  margin-top: 0.75em;
+  margin-left: 0.25em;
+  position: fixed;
 }
 
 @media screen and (max-width: 600px) {
