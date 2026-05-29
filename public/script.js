@@ -17,7 +17,6 @@ const errorMessage = document.querySelector(".errorMessage");
 
 let dragAndDropElements;
 
-const loginLink = document.querySelector("#navLoginLink");
 const navBrandLink = document.querySelector("#navBrandLink");
 const dragAndDropElementContainers = document.querySelectorAll(".dropzone");
 const newTaskColumn = document.querySelector("[data-new-task]");
