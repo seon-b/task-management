@@ -167,7 +167,7 @@ export function selectTheme(currentTheme = "mint green", root) {
   let index;
   let themeArray = getAppThemes();
   let currentThemeIndex = themeArray.findIndex(
-    (theme) => theme.colorName === currentTheme
+    (theme) => theme.colorName === currentTheme,
   );
 
   if (currentThemeIndex === themeArray.length - 1) {

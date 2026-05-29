@@ -135,9 +135,6 @@ function setDragAndDropElements() {
   dragAndDropElements = document.querySelectorAll(".taskContainer");
 }
 
-loginLink.addEventListener("click", () => {
-  displayErrorMessage(errorMessage, "Login not available");
-});
 navBrandLink.addEventListener("click", () => {
   window.location.assign("/");
 });
@@ -146,5 +143,5 @@ taskManagementArea.addEventListener("click", (e) => deleteTask(e));
 taskDeadlineInput.addEventListener("change", (e) => getUserInput(e));
 taskContentInput.addEventListener("change", (e) => getUserInput(e));
 themeButton.addEventListener("click", () =>
-  selectTheme(appState.userSettings.theme.colorName, root)
+  selectTheme(appState.userSettings.theme.colorName, root),
 );
