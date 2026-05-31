@@ -7,6 +7,7 @@ require("../src/auth-strategies/passportLocal");
 const helmet = require("helmet");
 const path = require("path");
 const { validateUser } = require("../src/auth-strategies/passportLocal");
+const { redirectToDashboard } = require("../lib/redirect-routes");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -35,7 +36,7 @@ app.use("/api", require("./routes"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 
-app.get("/", (req, res, next) => {
+app.get("/", redirectToDashboard, (req, res, next) => {
   res.render("index", { message: null });
 });
 

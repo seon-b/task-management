@@ -100,7 +100,7 @@ async function saveUserSettings() {
     if (!res.ok) {
       setAppState(
         "errorSuccessMessage",
-        "User settings data could not be saved"
+        "User settings data could not be saved",
       );
     }
 
@@ -147,6 +147,7 @@ async function updateUserLoginState() {
 dashboardLink.addEventListener("click", () => {
   window.location.assign("/dashboard");
 });
+logoutLink.addEventListener("click", () => {});
 window.addEventListener("load", getCurrentUserData);
 saveSettingsButton.addEventListener("click", saveUserSettings);
 saveTasksButton.addEventListener("click", saveCurrentTasks);
