@@ -1,4 +1,4 @@
-import * as z from "zod";
+const { z } = require("zod");
 
 const userSchema = z.object({
   email: z.email({ message: "Invalid email address format" }),
