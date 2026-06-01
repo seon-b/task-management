@@ -1,7 +1,11 @@
+// import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
+// import { initializeTaskList, removeAllComponents } from "./components.mjs";
+
 import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
 import { initializeTaskList, removeAllComponents } from "./components.mjs";
 
 const dashboardLink = document.querySelector("#navDashboardLink");
+const dragAndDropElementContainers = document.querySelectorAll(".dropzone");
 const newTaskColumn = document.querySelector("[data-new-task]");
 const saveSettingsButton = document.querySelector(".saveSettingsButton");
 const saveTasksButton = document.querySelector(".saveTasksButton");
@@ -10,6 +14,7 @@ const profileName = document.querySelector(".profileNameArea");
 const themeSelect = document.querySelector("#themeSelect");
 const root = document.documentElement;
 
+let dragAndDropElements;
 let initialUserSettings = null;
 let initialUserTasks = null;
 let initialLoginState = null;
@@ -47,10 +52,36 @@ async function getCurrentUserData() {
 
     removeAllComponents(newTaskColumn);
     initializeTaskList(newTaskColumn);
+    setDragAndDropElements(dragAndDropElements);
+    initializeDragAndDrop(dragAndDropElements, dragAndDropElementContainers);
 
     return data;
   } catch (error) {
     console.error("Could not get user data", error);
+  }
+}
+
+async function logout() {
+  userEmail = appState.userSettings.profileName;
+  try {
+    const res = await fetch("/api/users/logout", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      setAppState("errorSuccessMessage", "User could not be logged out");
+    }
+
+    const data = await res.json();
+    data.isLoggedOut
+      ? window.location.replace("/")
+      : console.error("User could not be logged out");
+  } catch (error) {
+    console.error(error);
   }
 }
 
@@ -144,10 +175,15 @@ async function updateUserLoginState() {
   }
 }
 
+function setDragAndDropElements() {
+  dragAndDropElements = document.querySelectorAll(".taskContainer");
+}
+
 dashboardLink.addEventListener("click", () => {
   window.location.assign("/dashboard");
 });
-logoutLink.addEventListener("click", () => {});
+
+logoutLink.addEventListener("click", logout);
 window.addEventListener("load", getCurrentUserData);
 saveSettingsButton.addEventListener("click", saveUserSettings);
 saveTasksButton.addEventListener("click", saveCurrentTasks);
