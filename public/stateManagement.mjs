@@ -1,4 +1,4 @@
-export let appState = {
+let appState = {
   errorSuccessMessage: "",
   componentIdList: [],
   componentList: [
@@ -41,7 +41,7 @@ export let appState = {
   },
 };
 
-export function displayErrorMessage(errorArea, message) {
+function displayErrorMessage(errorArea, message) {
   setAppState("errorSuccessMessage", message);
   errorArea.textContent = appState.errorSuccessMessage;
   errorArea.parentElement.parentElement.classList.remove("errorAreaHidden");
@@ -53,7 +53,7 @@ export function displayErrorMessage(errorArea, message) {
   }, 1000);
 }
 
-export function getAppThemes() {
+function getAppThemes() {
   let themeArray = [
     {
       colorName: "mint green",
@@ -102,7 +102,7 @@ export function getAppThemes() {
   return themeArray;
 }
 
-export function setAppState(state, value = "") {
+function setAppState(state, value = "") {
   if (state === "componentIdListAdd") {
     let newArray = appState.componentIdList;
     newArray.push(value);
@@ -163,7 +163,7 @@ export function setAppState(state, value = "") {
   }
 }
 
-export function selectTheme(currentTheme = "mint green", root) {
+function selectTheme(currentTheme = "mint green", root) {
   let index;
   let themeArray = getAppThemes();
   let currentThemeIndex = themeArray.findIndex(
@@ -181,8 +181,17 @@ export function selectTheme(currentTheme = "mint green", root) {
   updateTheme(root);
 }
 
-export function updateTheme(root) {
+function updateTheme(root) {
   root.style.setProperty("--hValue", appState.userSettings.theme.hValue);
   root.style.setProperty("--sValue", appState.userSettings.theme.sValue);
   root.style.setProperty("--lValue", appState.userSettings.theme.lValue);
 }
+
+export {
+  appState,
+  displayErrorMessage,
+  getAppThemes,
+  setAppState,
+  selectTheme,
+  updateTheme,
+};

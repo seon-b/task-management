@@ -15,7 +15,7 @@ const completedTaskColumn = document.querySelector("[data-completed-task]");
 const createTaskButton = document.querySelector(".submitButton");
 const errorMessage = document.querySelector(".errorMessage");
 
-let dragAndDropElements;
+let dragAndDropElements = [];
 
 const navBrandLink = document.querySelector("#navBrandLink");
 const dragAndDropElementContainers = document.querySelectorAll(".dropzone");
@@ -107,6 +107,8 @@ function getUserSelection(e) {
 }
 
 function initializeDragAndDrop() {
+  console.log(dragAndDropElements);
+  if (dragAndDropElements === null || dragAndDropElements.length === 0) return;
   dragAndDropElements.forEach((element) => {
     if (!element.classList.contains("dragAndDropEnabled")) {
       element.addEventListener("dragstart", () => {

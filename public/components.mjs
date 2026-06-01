@@ -74,7 +74,7 @@ export function addComponent(
   taskColumn,
   contentObject,
   errorMessage,
-  addComponentMode = ""
+  addComponentMode = "",
 ) {
   if (isContentObjectValid(contentObject) === false)
     return displayErrorMessage(errorMessage, appState.errorSuccessMessage);
@@ -148,7 +148,7 @@ export function removeAllComponents(column) {
 
 export function removeComponent(componentId) {
   let componentToRemove = document.querySelector(
-    `[data-task-id = "${componentId}"]`
+    `[data-task-id = "${componentId}"]`,
   );
 
   setAppState("componentIdListRemove", componentId);
@@ -167,13 +167,13 @@ export function isContentObjectValid(contentObject) {
   } else if (contentObject.taskContent.length > 100) {
     setAppState(
       "errorSuccessMessage",
-      "Cannot have more than a 100 characters in description"
+      "Cannot have more than a 100 characters in description",
     );
     return false;
   } else if (contentObject.taskName.length > 20) {
     setAppState(
       "errorSuccessMessage",
-      "Cannot have more than a 10 characters in task name"
+      "Cannot have more than a 10 characters in task name",
     );
     return false;
   } else {
@@ -181,6 +181,7 @@ export function isContentObjectValid(contentObject) {
 }
 
 export function initializeTaskList(initializationColumn) {
+  if (appState.componentList === null) appState.componentList = [];
   if (appState.componentList.length === 0) return;
   appState.componentList.forEach((task) => {
     addComponent("#taskComponent", initializationColumn, task, "initialize");
