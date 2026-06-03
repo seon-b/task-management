@@ -107,7 +107,6 @@ function getUserSelection(e) {
 }
 
 function initializeDragAndDrop() {
-  console.log(dragAndDropElements);
   if (dragAndDropElements === null || dragAndDropElements.length === 0) return;
   dragAndDropElements.forEach((element) => {
     if (!element.classList.contains("dragAndDropEnabled")) {
