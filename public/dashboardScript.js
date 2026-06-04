@@ -22,6 +22,22 @@ let userEmail = "";
 
 function deleteTask() {}
 
+function initializeDragAndDrop() {
+  if (dragAndDropElements === null || dragAndDropElements.length === 0) return;
+  dragAndDropElements.forEach((element) => {
+    if (!element.classList.contains("dragAndDropEnabled")) {
+      element.addEventListener("dragstart", () => {
+        element.classList.add("draggingComponent");
+      });
+      element.addEventListener("dragend", () => {
+        element.classList.remove("draggingComponent");
+      });
+      element.classList.add("dragAndDropEnabled");
+    } else {
+    }
+  });
+}
+
 async function getCurrentUserData() {
   setAppState("profileName", profileName.innerHTML);
   userEmail = appState.userSettings.profileName;
