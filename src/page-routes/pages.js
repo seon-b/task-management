@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const { redirectToDashboard } = require("../../lib/redirect-routes");
 
-router.get("/", redirectToDashboard, (req, res, next) => {
+router.get("/", (req, res, next) => {
   res.render("index", { message: null });
 });
 
-router.get("/dashboard", redirectToDashboard, (req, res, next) => {
+router.get("/dashboard", (req, res, next) => {
   res.render("dashboard", { profileName: req.user.email, message: null });
 });
 

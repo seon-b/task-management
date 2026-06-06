@@ -9,6 +9,8 @@ const path = require("path");
 const { validateUser } = require("../src/auth-strategies/passportLocal");
 const { redirectToDashboard } = require("../lib/redirect-routes");
 const app = express();
+const pages = require("./page-routes/pages");
+const apiRoutes = require("./api-routes");
 
 const PORT = process.env.PORT || 3000;
 
@@ -31,8 +33,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", require("./page-routes"));
-app.use("/api", require("./api-routes"));
+app.use("/", pages);
+app.use("/api", apiRoutes);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));

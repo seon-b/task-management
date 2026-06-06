@@ -3,7 +3,6 @@ const router = express.Router();
 
 const authRoute = require("./auth");
 const tasksRoute = require("./tasks");
-const pagesRoute = require("./pages");
 const usersRoute = require("./users");
 
 router.use("/auth", authRoute);
