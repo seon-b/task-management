@@ -31,26 +31,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api", require("./routes"));
+app.use("/", require("./page-routes"));
+app.use("/api", require("./api-routes"));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
-
-app.get("/", redirectToDashboard, (req, res, next) => {
-  res.render("index", { message: null });
-});
-
-app.get("/dashboard", validateUser, (req, res, next) => {
-  res.render("dashboard", { profileName: req.user.email, message: null });
-});
-
-app.get("/login", (req, res, next) => {
-  res.render("login", { message: null });
-});
-
-app.get("/login-failed", (req, res, next) => {
-  res.render("login", { message: "Login Unsuccessful" });
-});
 
 app.listen(PORT, () => {
   console.log(`Task Management App listening on port ${PORT}`);
