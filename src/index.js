@@ -1,6 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
+const pg = require("pg");
 const session = require("express-session");
+const pgSession = require("connect-pg-simple")(session);
 const passport = require("passport");
 require("../src/auth-strategies/passportLocal");
 
@@ -9,8 +11,18 @@ const path = require("path");
 const { validateUser } = require("../src/auth-strategies/passportLocal");
 const { redirectToDashboard } = require("../lib/redirect-routes");
 const app = express();
+
 const pages = require("./page-routes/pages");
 const apiRoutes = require("./api-routes");
+const { user } = require("../prisma/prisma-client");
+
+const pool = new pg.Pool({
+  database: process.env.DATABASE,
+  host: process.env.DATABASE_HOST,
+  password: process.env.DATABASE_PASSWORD,
+  port: parseInt(process.env.DATABASE_PORT),
+  user: process.env.DATABASE_USER,
+});
 
 const PORT = process.env.PORT || 3000;
 
@@ -21,11 +33,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(
   session({
+    store: new pgSession({
+      pool: pool,
+      tableName: process.env.DATABASE_SESSION_TABLE_NAME,
+    }),
     secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
     cookie: {
-      maxAge: 60000 * 120,
+      maxAge: 60 * 60 * 1000,
     },
   }),
 );
