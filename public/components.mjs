@@ -1,4 +1,8 @@
-import { appState, setAppState } from "./stateManagement.mjs";
+import {
+  appState,
+  displayErrorMessage,
+  setAppState,
+} from "./stateManagement.mjs";
 
 let idHashMap = {
   1: 48,
@@ -69,9 +73,11 @@ export function addComponent(
   templateId,
   taskColumn,
   contentObject,
-  addComponentMode = ""
+  errorMessage,
+  addComponentMode = "",
 ) {
-  if (isContentObjectValid(contentObject) === false) return;
+  if (isContentObjectValid(contentObject) === false)
+    return displayErrorMessage(errorMessage, appState.errorSuccessMessage);
   if (addComponentMode === "initialize") {
     let taskTemplate = document.querySelector(templateId);
     let newComponent = taskTemplate.content.cloneNode(true);
@@ -134,40 +140,6 @@ function setComponentId(component, value) {
   setAppState("componentIdListAdd", value);
 }
 
-export function initializeDragAndDrop(
-  dragAndDropElements,
-  dragAndDropElementContainers
-) {
-  dragAndDropElements.forEach((element) => {
-    if (!element.classList.contains("dragAndDropEnabled")) {
-      element.addEventListener("dragstart", () => {
-        element.classList.add("draggingComponent");
-      });
-      element.addEventListener("dragend", () => {
-        element.classList.remove("draggingComponent");
-      });
-      element.classList.add("dragAndDropEnabled");
-    } else {
-    }
-  });
-
-  dragAndDropElementContainers.forEach((element) => {
-    element.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      let currentDraggingComponent =
-        document.querySelector(".draggingComponent");
-      element.appendChild(currentDraggingComponent);
-    });
-  });
-}
-
-export function initializeTaskList(initializationColumn) {
-  if (appState.componentList.length === 0) return;
-  appState.componentList.forEach((task) => {
-    addComponent("#taskComponent", initializationColumn, task, "initialize");
-  });
-}
-
 export function removeAllComponents(column) {
   while (column.lastChild) {
     column.removeChild(column.lastChild);
@@ -176,11 +148,12 @@ export function removeAllComponents(column) {
 
 export function removeComponent(componentId) {
   let componentToRemove = document.querySelector(
-    `[data-task-id = "${componentId}"]`
+    `[data-task-id = "${componentId}"]`,
   );
 
-  componentToRemove.parentElement.removeChild(componentToRemove);
   setAppState("componentIdListRemove", componentId);
+  setAppState("componentListRemove", componentId);
+  componentToRemove.parentElement.removeChild(componentToRemove);
 }
 
 export function isContentObjectValid(contentObject) {
@@ -189,6 +162,28 @@ export function isContentObjectValid(contentObject) {
     contentObject.taskDeadline === "" ||
     contentObject.taskName === ""
   ) {
+    setAppState("errorSuccessMessage", "Cannot have empty input fields");
     return false;
+  } else if (contentObject.taskContent.length > 100) {
+    setAppState(
+      "errorSuccessMessage",
+      "Cannot have more than a 100 characters in description",
+    );
+    return false;
+  } else if (contentObject.taskName.length > 20) {
+    setAppState(
+      "errorSuccessMessage",
+      "Cannot have more than a 10 characters in task name",
+    );
+    return false;
+  } else {
   }
+}
+
+export function initializeTaskList(initializationColumn) {
+  if (appState.componentList === null) appState.componentList = [];
+  if (appState.componentList.length === 0) return;
+  appState.componentList.forEach((task) => {
+    addComponent("#taskComponent", initializationColumn, task, "initialize");
+  });
 }

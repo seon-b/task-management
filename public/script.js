@@ -1,39 +1,45 @@
-import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
+import {
+  appState,
+  displayErrorMessage,
+  selectTheme,
+  setAppState,
+} from "./stateManagement.mjs";
 import {
   addComponent,
-  initializeTaskList,
-  initializeDragAndDrop,
   removeComponent,
+  initializeTaskList,
 } from "./components.mjs";
 
 const currentTaskColumn = document.querySelector("[data-current-task]");
 const completedTaskColumn = document.querySelector("[data-completed-task]");
 const createTaskButton = document.querySelector(".submitButton");
-
 const errorMessage = document.querySelector(".errorMessage");
-let dragAndDropElements;
+
+let dragAndDropElements = [];
 
 const navBrandLink = document.querySelector("#navBrandLink");
-
 const dragAndDropElementContainers = document.querySelectorAll(".dropzone");
 const newTaskColumn = document.querySelector("[data-new-task]");
 const taskNameInput = document.querySelector("#taskName");
 const taskDeadlineInput = document.querySelector("#taskDeadline");
 const taskContentInput = document.querySelector("#taskContent");
+const taskManagementArea = document.querySelector("#taskManagementArea");
+const themeButton = document.querySelector(".themeButton");
+
 const root = document.documentElement;
 
 createTaskButton.addEventListener("click", (e) => {
   e.preventDefault();
-  addComponent("#taskComponent", newTaskColumn, appState);
+  addComponent("#taskComponent", newTaskColumn, appState, errorMessage);
   setAppState("clearForm");
   clearForm();
-  setDragAndDropElements(dragAndDropElements);
-  initializeDragAndDrop(dragAndDropElements, dragAndDropElementContainers);
+  setDragAndDropElements();
+  initializeDragAndDrop();
 });
 
 initializeTaskList(newTaskColumn);
-setDragAndDropElements(dragAndDropElements);
-initializeDragAndDrop(dragAndDropElements, dragAndDropElementContainers);
+setDragAndDropElements();
+initializeDragAndDrop();
 
 function clearForm() {
   taskContentInput.value = appState.taskContent;
@@ -41,16 +47,33 @@ function clearForm() {
   taskNameInput.value = appState.taskContent;
 }
 
-function displayErrorMessage(message) {
-  setAppState("errorSuccessMessage", message);
-  errorMessage.textContent = appState.errorSuccessMessage;
-  errorMessage.parentElement.parentElement.classList.remove("errorAreaHidden");
+function deleteTask(e) {
+  let taskId;
+  if (e.target.classList.contains("deleteButton")) {
+    taskId = e.target.parentElement.parentElement.dataset.taskId;
+  } else {
+    return;
+  }
 
-  setTimeout(() => {
-    errorMessage.parentElement.parentElement.classList.add("errorAreaHidden");
-    setAppState("errorSuccessMessage", "");
-    errorMessage.textContent = appState.errorSuccessMessage;
-  }, 1000);
+  removeComponent(taskId);
+}
+
+function formatTaskDeadlineDate(date) {
+  let dateArray = date.split("-");
+  let newDate = "";
+  let day = dateArray.pop();
+  let month = dateArray.pop();
+  let year = dateArray.pop();
+
+  if (month[0] === "0") {
+    let monthArray = month.split("");
+    month = monthArray[1];
+  }
+
+  newDate += month;
+  newDate = newDate + "/" + day;
+  newDate = newDate + "/" + year;
+  return newDate;
 }
 
 function getUserInput(e) {
@@ -64,7 +87,7 @@ function getUserInput(e) {
     setAppState("taskName", inputValue);
   } else if (inputLabel === "taskDeadline") {
     let element = document.querySelector(idName + inputLabel);
-    inputValue = element.value;
+    inputValue = formatTaskDeadlineDate(element.value);
     setAppState("taskDeadline", inputValue);
   } else if (inputLabel === "taskContent") {
     let element = document.querySelector(idName + inputLabel);
@@ -83,6 +106,31 @@ function getUserSelection(e) {
   }
 }
 
+function initializeDragAndDrop() {
+  if (dragAndDropElements === null || dragAndDropElements.length === 0) return;
+  dragAndDropElements.forEach((element) => {
+    if (!element.classList.contains("dragAndDropEnabled")) {
+      element.addEventListener("dragstart", () => {
+        element.classList.add("draggingComponent");
+      });
+      element.addEventListener("dragend", () => {
+        element.classList.remove("draggingComponent");
+      });
+      element.classList.add("dragAndDropEnabled");
+    } else {
+    }
+  });
+
+  dragAndDropElementContainers.forEach((element) => {
+    element.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      let currentDraggingComponent =
+        document.querySelector(".draggingComponent");
+      element.appendChild(currentDraggingComponent);
+    });
+  });
+}
+
 function setDragAndDropElements() {
   dragAndDropElements = document.querySelectorAll(".taskContainer");
 }
@@ -90,7 +138,10 @@ function setDragAndDropElements() {
 navBrandLink.addEventListener("click", () => {
   window.location.assign("/");
 });
-
 taskNameInput.addEventListener("change", (e) => getUserInput(e));
+taskManagementArea.addEventListener("click", (e) => deleteTask(e));
 taskDeadlineInput.addEventListener("change", (e) => getUserInput(e));
 taskContentInput.addEventListener("change", (e) => getUserInput(e));
+themeButton.addEventListener("click", () =>
+  selectTheme(appState.userSettings.theme.colorName, root),
+);

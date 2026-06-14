@@ -1,3 +1,6 @@
+// import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
+// import { initializeTaskList, removeAllComponents } from "./components.mjs";
+
 import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
 import {
   initializeTaskList,
@@ -22,6 +25,22 @@ let initialLoginState = null;
 let userEmail = "";
 
 function deleteTask() {}
+
+function initializeDragAndDrop() {
+  if (dragAndDropElements === null || dragAndDropElements.length === 0) return;
+  dragAndDropElements.forEach((element) => {
+    if (!element.classList.contains("dragAndDropEnabled")) {
+      element.addEventListener("dragstart", () => {
+        element.classList.add("draggingComponent");
+      });
+      element.addEventListener("dragend", () => {
+        element.classList.remove("draggingComponent");
+      });
+      element.classList.add("dragAndDropEnabled");
+    } else {
+    }
+  });
+}
 
 async function getCurrentUserData() {
   setAppState("profileName", profileName.innerHTML);
@@ -132,7 +151,7 @@ async function saveUserSettings() {
     if (!res.ok) {
       setAppState(
         "errorSuccessMessage",
-        "User settings data could not be saved"
+        "User settings data could not be saved",
       );
     }
 

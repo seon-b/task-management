@@ -22,6 +22,12 @@ model User {
   settings     Json?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
 
- 
+model Session {
+  sid    String   @id @unique
+  sess   Json
+  expire DateTime
+
+  @@map("session")
 }

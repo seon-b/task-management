@@ -1,6 +1,6 @@
-export let appState = {
+let appState = {
   errorSuccessMessage: "",
-  componentIdList: ["gYxBiz", "8nhpUE", "Z8WKIn"],
+  componentIdList: [],
   componentList: [
     {
       taskId: "gYxBiz",
@@ -41,7 +41,19 @@ export let appState = {
   },
 };
 
-export function getAppThemes() {
+function displayErrorMessage(errorArea, message) {
+  setAppState("errorSuccessMessage", message);
+  errorArea.textContent = appState.errorSuccessMessage;
+  errorArea.parentElement.parentElement.classList.remove("errorAreaHidden");
+
+  setTimeout(() => {
+    errorArea.parentElement.parentElement.classList.add("errorAreaHidden");
+    setAppState("errorSuccessMessage", "");
+    errorArea.textContent = appState.errorSuccessMessage;
+  }, 1000);
+}
+
+function getAppThemes() {
   let themeArray = [
     {
       colorName: "mint green",
@@ -62,17 +74,35 @@ export function getAppThemes() {
       lValue: "33%",
     },
     {
+      colorName: "cyan",
+      hValue: "193",
+      sValue: "100%",
+      lValue: "46%",
+    },
+    {
       colorName: "purple",
       hValue: "276",
       sValue: "66%",
       lValue: "40%",
+    },
+    {
+      colorName: "lavender",
+      hValue: "275",
+      sValue: "57%",
+      lValue: "68%",
+    },
+    {
+      colorName: "pink",
+      hValue: "330",
+      sValue: "100%",
+      lValue: "71%",
     },
   ];
 
   return themeArray;
 }
 
-export function setAppState(state, value = "") {
+function setAppState(state, value = "") {
   if (state === "componentIdListAdd") {
     let newArray = appState.componentIdList;
     newArray.push(value);
@@ -84,17 +114,11 @@ export function setAppState(state, value = "") {
     let newArray = appState.componentList;
     newArray.push(value);
   } else if (state === "componentIdListRemove") {
-    appState.componentIdList.find((id, index) => {
-      if (id === value) {
-        appState.componentIdList.splice(index, 1);
-      }
-    });
+    let index = appState.componentIdList.indexOf(value);
+    appState.componentIdList.splice(index, 1);
   } else if (state === "componentListRemove") {
-    appState.componentList.find((id, index) => {
-      if (id === value) {
-        appState.componentList.splice(index, 1);
-      }
-    });
+    let index = appState.componentList.indexOf(value);
+    appState.componentList.splice(index, 1);
   } else if (state === "componentListInitialize") {
     appState.componentList = [];
     appState = { ...appState, componentList: value };
@@ -139,19 +163,35 @@ export function setAppState(state, value = "") {
   }
 }
 
-export function selectTheme(e, root) {
+function selectTheme(currentTheme = "mint green", root) {
+  let index;
   let themeArray = getAppThemes();
-  let selectedThemeIndex = themeArray.findIndex(
-    (theme) => theme.colorName === e.target.value
+  let currentThemeIndex = themeArray.findIndex(
+    (theme) => theme.colorName === currentTheme,
   );
 
-  let selectedTheme = themeArray[selectedThemeIndex];
+  if (currentThemeIndex === themeArray.length - 1) {
+    index = 0;
+  } else {
+    index = currentThemeIndex + 1;
+  }
+
+  let selectedTheme = themeArray[index];
   setAppState("theme", selectedTheme);
   updateTheme(root);
 }
 
-export function updateTheme(root) {
+function updateTheme(root) {
   root.style.setProperty("--hValue", appState.userSettings.theme.hValue);
   root.style.setProperty("--sValue", appState.userSettings.theme.sValue);
   root.style.setProperty("--lValue", appState.userSettings.theme.lValue);
 }
+
+export {
+  appState,
+  displayErrorMessage,
+  getAppThemes,
+  setAppState,
+  selectTheme,
+  updateTheme,
+};
