@@ -1,12 +1,5 @@
-// import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
-// import { initializeTaskList, removeAllComponents } from "./components.mjs";
-
 import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
-import {
-  initializeTaskList,
-  initializeDragAndDrop,
-  removeAllComponents,
-} from "./components.mjs";
+import { initializeTaskList, removeAllComponents } from "./components.mjs";
 
 const dashboardLink = document.querySelector("#navDashboardLink");
 const dragAndDropElementContainers = document.querySelectorAll(".dropzone");
