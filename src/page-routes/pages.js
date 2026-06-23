@@ -1,20 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const { redirectToDashboard } = require("../../lib/redirect-routes");
+const {
+  redirectToDashboard,
+  redirectToRoot,
+} = require("../../lib/redirect-routes");
 
-router.get("/", (req, res, next) => {
+router.get("/", redirectToDashboard, (req, res, next) => {
   res.render("index", { message: null });
 });
 
-router.get("/dashboard", (req, res, next) => {
+router.get("/dashboard", redirectToRoot, (req, res, next) => {
   res.render("dashboard", { profileName: req.user.email, message: null });
 });
 
-router.get("/login", (req, res, next) => {
+router.get("/login", redirectToDashboard, (req, res, next) => {
   res.render("login", { message: null });
 });
 
-router.get("/login-failed", (req, res, next) => {
+router.get("/login-failed", redirectToDashboard, (req, res, next) => {
   res.render("login", { message: "Login Unsuccessful" });
 });
 
