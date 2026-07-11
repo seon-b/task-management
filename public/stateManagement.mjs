@@ -113,6 +113,17 @@ function setAppState(state, value = "") {
   } else if (state === "componentListAdd") {
     let newArray = appState.componentList;
     newArray.push(value);
+    appState = {
+      ...appState,
+      componentList: newArray,
+    };
+  } else if (state === "componentListClear") {
+    let newArray = [];
+    appState = {
+      ...appState,
+      componentList: newArray,
+      componentIdList: newArray,
+    };
   } else if (state === "componentIdListRemove") {
     let index = appState.componentIdList.indexOf(value);
     appState.componentIdList.splice(index, 1);
