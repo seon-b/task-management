@@ -151,9 +151,9 @@ export function removeComponent(componentId) {
     `[data-task-id = "${componentId}"]`,
   );
 
+  componentToRemove.parentElement.removeChild(componentToRemove);
   setAppState("componentIdListRemove", componentId);
   setAppState("componentListRemove", componentId);
-  componentToRemove.parentElement.removeChild(componentToRemove);
 }
 
 export function isContentObjectValid(contentObject) {
@@ -181,8 +181,9 @@ export function isContentObjectValid(contentObject) {
 }
 
 export function initializeTaskList(initializationColumn) {
-  if (appState.componentList === null) appState.componentList = [];
+  if (appState.componentList === null) setAppState("componentListClear");
   if (appState.componentList.length === 0) return;
+
   appState.componentList.forEach((task) => {
     addComponent("#taskComponent", initializationColumn, task, "initialize");
   });

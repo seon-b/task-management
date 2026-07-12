@@ -112,7 +112,9 @@ function setAppState(state, value = "") {
     };
   } else if (state === "componentListAdd") {
     let newArray = appState.componentList;
+    // let newArray = [];
     newArray.push(value);
+
     appState = {
       ...appState,
       componentList: newArray,
@@ -125,11 +127,15 @@ function setAppState(state, value = "") {
       componentIdList: newArray,
     };
   } else if (state === "componentIdListRemove") {
-    let index = appState.componentIdList.indexOf(value);
-    appState.componentIdList.splice(index, 1);
+    let newArray = appState.componentIdList.filter(
+      (componentId) => componentId !== value,
+    );
+    appState = { ...appState, componentIdList: newArray };
   } else if (state === "componentListRemove") {
-    let index = appState.componentList.indexOf(value);
-    appState.componentList.splice(index, 1);
+    let newArray = appState.componentList.filter(
+      (component) => component.taskId !== value,
+    );
+    appState = { ...appState, componentList: newArray };
   } else if (state === "componentListInitialize") {
     appState.componentList = [];
     appState = { ...appState, componentList: value };
