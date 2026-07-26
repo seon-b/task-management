@@ -14,33 +14,33 @@ datasource db {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
   passwordHash String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  tasks        Tasks[]
+  settings     Settings[]
 }
 
 model Tasks {
-  id        Int     @id @default(autoincrement())
-  sessionId String
-  session   Session @relation(fields: [sessionId], references: [sid])
+  id        Int    @id @default(autoincrement())
   tasks     Json?
+  userEmail String
+  email     User   @relation(fields: [userEmail], references: [email])
 }
 
 model Settings {
-  id        Int     @id @default(autoincrement())
-  sessionId String
-  session   Session @relation(fields: [sessionId], references: [sid])
+  id        Int    @id @default(autoincrement())
   settings  Json?
+  userEmail String
+  email     User   @relation(fields: [userEmail], references: [email])
 }
 
 model Session {
-  sid      String     @id @unique
-  sess     Json
-  expire   DateTime
-  tasks    Tasks[]
-  settings Settings[]
+  sid    String   @id @unique
+  sess   Json
+  expire DateTime
 
   @@map("session")
 }
