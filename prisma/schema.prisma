@@ -16,18 +16,31 @@ datasource db {
 model User {
   id           Int      @id @default(autoincrement())
   email        String   @unique
-  isLoggedIn   Boolean  @default(false)
   passwordHash String
-  tasks        Json?
-  settings     Json?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
 
+model Tasks {
+  id        Int     @id @default(autoincrement())
+  sessionId String
+  session   Session @relation(fields: [sessionId], references: [sid])
+  tasks     Json?
+}
+
+model Settings {
+  id        Int     @id @default(autoincrement())
+  sessionId String
+  session   Session @relation(fields: [sessionId], references: [sid])
+  settings  Json?
+}
+
 model Session {
-  sid    String   @id @unique
-  sess   Json
-  expire DateTime
+  sid      String     @id @unique
+  sess     Json
+  expire   DateTime
+  tasks    Tasks[]
+  settings Settings[]
 
   @@map("session")
 }
