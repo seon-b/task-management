@@ -4,13 +4,16 @@ const prisma = require("../../prisma/prisma-client");
 
 router.get("/user-tasks", async (req, res, next) => {
   const { email } = req.body;
-
   const user = await prisma.user.findUnique({
     where: { email: email },
   });
 
   if (user === null) return res.sendStatus(404);
-  res.json(user).statusCode(200);
+
+  const tasks = await prisma.tasks.findUnique({
+    where: { email: email },
+  });
+  res.json(tasks).statusCode(200);
 });
 
 router.put("/save-tasks", async (req, res) => {
@@ -25,11 +28,11 @@ router.put("/save-tasks", async (req, res) => {
   if (existingUser === null)
     return res.json({ error: "User does not exist" }).status(404);
 
-  const updatedTasks = await prisma.user.update({
-    where: { email: email },
+  const updatedTasks = await prisma.tasks.update({
+    where: { userEmail: email },
     data: { tasks: tasks },
   });
-  res.json(updatedTasks);
+  res.status(204);
 });
 
 module.exports = router;

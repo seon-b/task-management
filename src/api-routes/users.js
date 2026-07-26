@@ -15,8 +15,8 @@ router.post("/get-user-data", async (req, res) => {
   if (existingUser === null) {
     return res.json({ error: "User does not exist" }).status(404);
   } else {
-    const { isLoggedIn, tasks, settings } = existingUser;
-    let userSettingsObject = { isLoggedIn, tasks, settings };
+    const { email, createdAt, updatedAt } = existingUser;
+    let userSettingsObject = { email, createdAt, updatedAt };
     return res.json(userSettingsObject);
   }
 });
@@ -55,47 +55,11 @@ router.put("/save-user-settings", async (req, res) => {
   if (existingUser === null)
     return res.json({ error: "User does not exist" }).status(404);
 
-  const updatedUserSettings = await prisma.user.update({
-    where: { email: email },
+  const updatedUserSettings = await prisma.settings.update({
+    where: { userEmail: email },
     data: { settings: settings },
   });
   res.json({ message: "Users settings saved" }).status(204);
-});
-
-router.put("/update-login-state", async (req, res) => {
-  const { email, loginState } = req.body;
-
-  const existingUser = await prisma.user.findUnique({
-    where: {
-      email: email,
-    },
-  });
-
-  if (existingUser === null)
-    return res.json({ error: "User does not exist" }).status(404);
-
-  const updatedState = await prisma.user.update({
-    where: { email: email },
-    data: { isLoggedIn: loginState },
-  });
-
-  res.json({ message: "Login state updated" }).status(204);
-});
-
-router.post("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-
-    req.session.destroy((err) => {
-      if (err) {
-        return next(err);
-      }
-
-      res.json({ isLoggedOut: true });
-    });
-  });
 });
 
 module.exports = router;
