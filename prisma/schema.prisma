@@ -26,14 +26,14 @@ model User {
 model Tasks {
   id        Int    @id @default(autoincrement())
   tasks     Json?
-  userEmail String
+  userEmail String @unique
   email     User   @relation(fields: [userEmail], references: [email])
 }
 
 model Settings {
   id        Int    @id @default(autoincrement())
   settings  Json?
-  userEmail String
+  userEmail String @unique
   email     User   @relation(fields: [userEmail], references: [email])
 }
 
