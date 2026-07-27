@@ -111,8 +111,7 @@ function setAppState(state, value = "") {
       componentIdList: newArray,
     };
   } else if (state === "componentListAdd") {
-    let newArray = appState.componentList;
-    // let newArray = [];
+    let newArray = appState.componentList || [];
     newArray.push(value);
 
     appState = {
