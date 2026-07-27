@@ -28,9 +28,11 @@ router.put("/save-tasks", async (req, res) => {
   if (existingUser === null)
     return res.json({ error: "User does not exist" }).status(404);
 
-  const updatedTasks = await prisma.tasks.update({
+  const updatedTasks = await prisma.tasks.upsert({
     where: { userEmail: email },
-    data: { tasks: tasks },
+    update: { tasks: tasks },
+    create: { tasks: tasks, userEmail: email },
+    select: { tasks: true },
   });
   res.status(204);
 });

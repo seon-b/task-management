@@ -28,9 +28,11 @@ router.put("/save-settings", async (req, res) => {
   if (existingUser === null)
     return res.json({ error: "User does not exist" }).status(404);
 
-  const updatedsettings = await prisma.settings.update({
+  const updatedsettings = await prisma.settings.upsert({
     where: { userEmail: email },
-    data: { settings: settings },
+    update: { settings: settings },
+    create: { settings: settings, userEmail: email },
+    select: { settings: true },
   });
   res.status(204);
 });
