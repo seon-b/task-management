@@ -57,11 +57,9 @@ async function getCurrentUserData() {
 
     initialUserTasks = data.tasks;
     initialUserSettings = data.settings;
-    initialLoginState = data.isLoggedIn;
 
     setAppState("componentListInitialize", initialUserTasks);
     setAppState("userSettings", initialUserSettings);
-    setAppState("isLoggedIn", initialLoginState);
 
     removeAllComponents(newTaskColumn);
     initializeTaskList(newTaskColumn);
@@ -152,39 +150,6 @@ async function saveUserSettings() {
     return data;
   } catch (error) {
     console.error("user settings data could not be saved", error);
-  }
-}
-
-async function updateUserLoginState() {
-  setAppState("profileName", profileName.innerHTML);
-  userEmail = appState.userSettings.profileName;
-  let currentLoginState = appState.isLoggedIn;
-
-  if (appState.isLoggedIn === true) {
-    currentLoginState = false;
-  } else {
-    currentLoginState = true;
-  }
-
-  try {
-    const res = await fetch("/api/users/update-login-state", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: userEmail,
-        loginState: currentLoginState,
-      }),
-    });
-    if (!res.ok) {
-      setAppState("errorSuccessMessage", "login state could not be updated");
-    }
-
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error("login state could not be updated", error);
   }
 }
 
