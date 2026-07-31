@@ -12,11 +12,18 @@ router.post("/get-user-data", async (req, res) => {
     },
   });
 
+  const existingUserTasks = await prisma.tasks.findUnique({
+    where: { userEmail: email },
+  });
+
   if (existingUser === null) {
     return res.json({ error: "User does not exist" }).status(404);
   } else {
     const { email, createdAt, updatedAt } = existingUser;
+    const { tasks } = existingUserTasks;
+
     let userSettingsObject = { email, createdAt, updatedAt };
+    userSettingsObject.tasks = tasks;
     return res.json(userSettingsObject);
   }
 });
@@ -60,6 +67,22 @@ router.put("/save-user-settings", async (req, res) => {
     data: { settings: settings },
   });
   res.json({ message: "Users settings saved" }).status(204);
+});
+
+router.post("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+
+    req.session.destroy((err) => {
+      if (err) {
+        return next(err);
+      }
+
+      res.json({ isLoggedOut: true });
+    });
+  });
 });
 
 module.exports = router;
