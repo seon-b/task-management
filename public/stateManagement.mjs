@@ -25,7 +25,6 @@ let appState = {
       taskName: "Register for classes",
     },
   ],
-  isLoggedIn: false,
   taskContent: "",
   taskDeadline: "",
   taskLocationColumn: "newTaskColumn",
@@ -148,11 +147,6 @@ function setAppState(state, value = "") {
     };
   } else if (state === "errorSuccessMessage") {
     appState = { ...appState, errorSuccessMessage: value };
-  } else if (state === "isLoggedIn") {
-    appState = {
-      ...appState,
-      isLoggedIn: value,
-    };
   } else if (state === "profileName") {
     appState = {
       ...appState,
