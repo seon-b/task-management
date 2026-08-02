@@ -73,7 +73,7 @@ export function addComponent(
   templateId,
   taskColumn,
   contentObject,
-  errorMessage,
+  errorMessage = "",
   addComponentMode = undefined,
 ) {
   if (addComponentMode === undefined) {
@@ -188,6 +188,12 @@ export function initializeTaskList(initializationColumn) {
   if (appState.componentList === null) setAppState("componentListClear");
   if (appState.componentList.length === 0) return;
   appState.componentList.forEach((task) => {
-    addComponent("#taskComponent", initializationColumn, task, "initialize");
+    addComponent(
+      "#taskComponent",
+      initializationColumn,
+      task,
+      appState.errorSuccessMessage,
+      "initialize",
+    );
   });
 }
