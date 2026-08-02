@@ -30,7 +30,13 @@ const root = document.documentElement;
 
 createTaskButton.addEventListener("click", (e) => {
   e.preventDefault();
-  addComponent("#taskComponent", newTaskColumn, appState, errorMessage);
+  addComponent(
+    "#taskComponent",
+    newTaskColumn,
+    appState,
+    errorMessage,
+    "new component",
+  );
   setAppState("clearForm");
   clearForm();
   setDragAndDropElements();

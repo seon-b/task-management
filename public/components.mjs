@@ -74,8 +74,11 @@ export function addComponent(
   taskColumn,
   contentObject,
   errorMessage,
-  addComponentMode = "",
+  addComponentMode = undefined,
 ) {
+  if (addComponentMode === undefined) {
+    return;
+  }
   if (isContentObjectValid(contentObject) === false)
     return displayErrorMessage(errorMessage, appState.errorSuccessMessage);
   if (addComponentMode === "initialize") {
@@ -89,7 +92,7 @@ export function addComponent(
       contentObject.taskDeadline;
     newComponent.querySelector(".name").textContent = contentObject.taskName;
     taskColumn.appendChild(newComponent);
-  } else {
+  } else if (addComponentMode === "new component") {
     let taskTemplate = document.querySelector(templateId);
     let newComponent = taskTemplate.content.cloneNode(true);
     let newComponentId = newComponent.querySelector(".taskContainer");
@@ -120,6 +123,7 @@ export function addComponent(
     };
 
     setAppState("componentListAdd", newComponentObject);
+  } else {
   }
 }
 
@@ -183,7 +187,6 @@ export function isContentObjectValid(contentObject) {
 export function initializeTaskList(initializationColumn) {
   if (appState.componentList === null) setAppState("componentListClear");
   if (appState.componentList.length === 0) return;
-
   appState.componentList.forEach((task) => {
     addComponent("#taskComponent", initializationColumn, task, "initialize");
   });
