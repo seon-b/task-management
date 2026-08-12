@@ -1,5 +1,6 @@
 import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
 import { initializeTaskList, removeAllComponents } from "./components.mjs";
+import { formatUsername } from "./helper-functions.mjs";
 
 const dashboardLink = document.querySelector("#navDashboardLink");
 const dragAndDropElementContainers = document.querySelectorAll(".dropzone");
@@ -69,7 +70,7 @@ async function getCurrentUserTasks() {
     setDragAndDropElements(dragAndDropElements);
     initializeDragAndDrop(dragAndDropElements, dragAndDropElementContainers);
 
-    usernameLink.innerHTML = userEmail;
+    usernameLink.innerHTML = formatUsername(userEmail);
     return data;
   } catch (error) {
     console.error("Could not get user data", error);
