@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const prisma = require("../../prisma/prisma-client");
 
-router.post("/get-user-data", async (req, res) => {
+router.post("/user-data", async (req, res) => {
   const { email } = req.body;
 
   const existingUser = await prisma.user.findUnique({
@@ -12,19 +12,13 @@ router.post("/get-user-data", async (req, res) => {
     },
   });
 
-  const existingUserTasks = await prisma.tasks.findUnique({
-    where: { userEmail: email },
-  });
-
   if (existingUser === null) {
     return res.json({ error: "User does not exist" }).status(404);
   } else {
     const { email, createdAt, updatedAt } = existingUser;
-    const { tasks } = existingUserTasks;
 
-    let userSettingsObject = { email, createdAt, updatedAt };
-    userSettingsObject.tasks = tasks;
-    return res.json(userSettingsObject);
+    let userObject = { email, createdAt, updatedAt };
+    return res.json(userObject);
   }
 });
 

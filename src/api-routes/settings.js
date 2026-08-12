@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const prisma = require("../../prisma/prisma-client");
 
-router.get("/user-settings", async (req, res, next) => {
+router.post("/user-settings", async (req, res, next) => {
   const { email } = req.body;
   const user = await prisma.user.findUnique({
     where: { email: email },
@@ -13,7 +13,9 @@ router.get("/user-settings", async (req, res, next) => {
   const settings = await prisma.settings.findUnique({
     where: { userEmail: email },
   });
-  res.json(settings).statusCode(200);
+
+  const settingsObject = settings.settings;
+  return res.json(settingsObject).status(200);
 });
 
 router.put("/save-settings", async (req, res) => {

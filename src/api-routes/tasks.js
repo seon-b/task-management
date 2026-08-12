@@ -2,18 +2,27 @@ const express = require("express");
 const router = express.Router();
 const prisma = require("../../prisma/prisma-client");
 
-router.get("/user-tasks", async (req, res, next) => {
+router.post("/user-tasks", async (req, res) => {
   const { email } = req.body;
-  const user = await prisma.user.findUnique({
-    where: { email: email },
+
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
   });
 
-  if (user === null) return res.sendStatus(404);
-
-  const tasks = await prisma.tasks.findUnique({
-    where: { email: email },
+  const existingUserTasks = await prisma.tasks.findUnique({
+    where: { userEmail: email },
   });
-  res.json(tasks).statusCode(200);
+
+  if (existingUser === null) {
+    return res.json({ error: "User does not exist" }).status(404);
+  } else {
+    const { tasks } = existingUserTasks;
+
+    userTasksObject = tasks;
+    return res.json(userTasksObject);
+  }
 });
 
 router.put("/save-tasks", async (req, res) => {

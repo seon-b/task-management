@@ -8,6 +8,7 @@ const saveSettingsButton = document.querySelector(".saveSettingsButton");
 const saveTasksButton = document.querySelector(".saveTasksButton");
 const logoutLink = document.querySelector("#navLogoutLink");
 const profileName = document.querySelector(".profileNameArea");
+const usernameLink = document.querySelector("#navUsernameLink");
 const themeSelect = document.querySelector("#themeSelect");
 const root = document.documentElement;
 
@@ -19,6 +20,10 @@ let userEmail = "";
 
 function deleteTask() {}
 
+function initializeApp() {
+  getCurrentUserTasks();
+  getCurrentUserSettings();
+}
 function initializeDragAndDrop() {
   if (dragAndDropElements === null || dragAndDropElements.length === 0) return;
   dragAndDropElements.forEach((element) => {
@@ -35,12 +40,12 @@ function initializeDragAndDrop() {
   });
 }
 
-async function getCurrentUserData() {
+async function getCurrentUserTasks() {
   setAppState("profileName", profileName.innerHTML);
   userEmail = appState.userSettings.profileName;
 
   try {
-    const res = await fetch("/api/users/get-user-data", {
+    const res = await fetch("/api/tasks/user-tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,20 +60,48 @@ async function getCurrentUserData() {
 
     const data = await res.json();
 
-    initialUserTasks = data.tasks;
-    initialUserSettings = data.settings;
+    initialUserTasks = data;
 
     setAppState("componentListInitialize", initialUserTasks);
-    setAppState("userSettings", initialUserSettings);
 
     removeAllComponents(newTaskColumn);
     initializeTaskList(newTaskColumn);
     setDragAndDropElements(dragAndDropElements);
     initializeDragAndDrop(dragAndDropElements, dragAndDropElementContainers);
 
+    usernameLink.innerHTML = userEmail;
     return data;
   } catch (error) {
     console.error("Could not get user data", error);
+  }
+}
+
+async function getCurrentUserSettings() {
+  setAppState("profileName", profileName.innerHTML);
+  userEmail = appState.userSettings.profileName;
+
+  try {
+    const res = await fetch("/api/settings/user-settings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: userEmail,
+      }),
+    });
+    if (!res.ok) {
+      setAppState("errorSuccessMessage", "Could not get user data");
+    }
+
+    const data = await res.json();
+
+    initialUserSettings = data;
+
+    setAppState("theme", data);
+    return data;
+  } catch (error) {
+    console.error("Could not get user settings", error);
   }
 }
 
@@ -162,7 +195,7 @@ dashboardLink.addEventListener("click", () => {
 });
 
 logoutLink.addEventListener("click", logout);
-window.addEventListener("load", getCurrentUserData);
+window.addEventListener("load", initializeApp);
 saveSettingsButton.addEventListener("click", saveUserSettings);
 saveTasksButton.addEventListener("click", saveCurrentTasks);
 themeSelect.addEventListener("change", (e) => selectTheme(e, root));
