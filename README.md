@@ -37,3 +37,8 @@ When a new task is created it goes into the "new task column" by default. To cha
 - Calendar
 - Drag and drop on mobile devices
 - Ability to set the priorty of tasks
+
+## Version History
+
+- 1.1.0 - Updated session data storage method
+- 1.0.0 - Initial release
