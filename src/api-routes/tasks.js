@@ -20,6 +20,8 @@ router.post("/user-tasks", async (req, res) => {
   } else {
     const { tasks } = existingUserTasks;
 
+    if (tasks === null) return res.sendStatus(404);
+
     userTasksObject = tasks;
     return res.json(userTasksObject);
   }

@@ -4,6 +4,7 @@ const prisma = require("../../prisma/prisma-client");
 
 router.post("/user-settings", async (req, res, next) => {
   const { email } = req.body;
+
   const user = await prisma.user.findUnique({
     where: { email: email },
   });
@@ -13,6 +14,8 @@ router.post("/user-settings", async (req, res, next) => {
   const settings = await prisma.settings.findUnique({
     where: { userEmail: email },
   });
+
+  if (settings === null) return res.sendStatus(404);
 
   const settingsObject = settings.settings;
   return res.json(settingsObject).status(200);

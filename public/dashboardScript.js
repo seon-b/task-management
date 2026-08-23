@@ -1,4 +1,9 @@
-import { appState, selectTheme, setAppState } from "./stateManagement.mjs";
+import {
+  appState,
+  selectTheme,
+  setAppState,
+  updateTheme,
+} from "./stateManagement.mjs";
 import { initializeTaskList, removeAllComponents } from "./components.mjs";
 import { formatUsername } from "./helper-functions.mjs";
 
@@ -99,7 +104,8 @@ async function getCurrentUserSettings() {
 
     initialUserSettings = data;
 
-    setAppState("theme", data);
+    setAppState("userSettings", initialUserSettings);
+    updateTheme(root);
     return data;
   } catch (error) {
     console.error("Could not get user settings", error);
@@ -163,7 +169,7 @@ async function saveUserSettings() {
 
   const currentUserSettings = appState.userSettings;
   try {
-    const res = await fetch("/api/users/save-user-settings", {
+    const res = await fetch("/api/settings/save-settings", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

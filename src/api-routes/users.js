@@ -44,25 +44,6 @@ router.post("/new-user", async (req, res) => {
   res.json(newUser.email).status(201);
 });
 
-router.put("/save-user-settings", async (req, res) => {
-  const { email, settings } = req.body;
-
-  const existingUser = await prisma.user.findUnique({
-    where: {
-      email: email,
-    },
-  });
-
-  if (existingUser === null)
-    return res.json({ error: "User does not exist" }).status(404);
-
-  const updatedUserSettings = await prisma.settings.update({
-    where: { userEmail: email },
-    data: { settings: settings },
-  });
-  res.json({ message: "Users settings saved" }).status(204);
-});
-
 router.post("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) {
